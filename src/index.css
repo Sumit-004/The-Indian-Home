@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+body{
+    /* font-family: 'Lucida Sans Unicode', Verdana; */
+    font-family: Century Gothic;
+    background-color: white;
+    
+}
+.copyright::before{
+    content:'©';
+}
