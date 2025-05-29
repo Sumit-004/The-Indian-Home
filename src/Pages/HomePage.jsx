@@ -4,7 +4,7 @@ import Footer from '../Components/Footer'
 import Categories from '../Components/Categories'
 import homeimage from "../assets/homeimage.webp"
 import Slider from '../Components/ImageSlider'
-
+import Review from '../Components/Review'
 
 const MainPage = () => {
     return (
@@ -19,6 +19,7 @@ const MainPage = () => {
             <div>
                 <img src={homeimage} alt="" />
             </div>
+            <Review/>
             
             <Footer />
         </div>
