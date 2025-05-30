@@ -1,10 +1,18 @@
 import React from 'react'
+import CartPage from './Pages/CartPage';
 import HomePage from './Pages/HomePage'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 const App = () => {
   return (
     <>
-       <HomePage/> 
+      
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/CartPage" element={<CartPage />} />
+        </Routes>
+      
     </>
   )
 }

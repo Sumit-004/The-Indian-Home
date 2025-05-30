@@ -7,9 +7,9 @@ import logo from '../assets/logo1.png'
 
 const Footer = () => {
   return (
-    <div className='bg-[#FAFFCA] w-full h-[500px] flex flex-col gap-2'>
-      <footer className='flex px-[100px]'>
-        <div className='h-full w-1/5 flex flex-col items-center justify-center gap-8 px-3'>
+    <div className='bg-[#FAFFCA] w-full md:h-[500px] h-auto flex flex-col gap-2'>
+      <footer className='flex flex-col gap-2 md:flex md:flex-row md:px-[100px] px-6 w-full'>
+        <div className='h-full md:w-1/5 w-full flex flex-col items-center justify-center gap-8 px-3'>
           <div className='h-[100px] w-[100px]'><img src={logo} alt="" /></div>
           <p>Sign up for exclusive offers, original stories, events and more.</p>
           <div className='flex flex-col gap-2'>
@@ -22,7 +22,8 @@ const Footer = () => {
             <FaYoutube />
           </div>
         </div>
-        <div className='h-full w-1/5 flex flex-col gap-6 mt-20 items-center'>
+        {/* Quick Links */}
+        <div className='h-full md:w-1/5 w-full flex flex-col gap-6 md:mt-20 mt-8 items-center'>
           <h1 className='font-bold text-2xl border-b-3 border-red-800'>Quick Links</h1>
           <ul className='flex flex-col gap-2'>
             <li className='hover:underline cursor-pointer'>Our Story</li>
@@ -34,7 +35,8 @@ const Footer = () => {
             <li className='hover:underline cursor-pointer'>Return & Exchange</li>
           </ul>
         </div>
-        <div className='h-full w-1/5 flex flex-col gap-6 mt-20 items-center'>
+        {/* Categories */}
+        <div className='h-full md:w-1/5 w-full flex flex-col gap-6 md:mt-20 mt-8 items-center'>
           <h1 className='font-bold text-2xl border-b-3 border-red-800'>Categories</h1>
           <ul className='flex flex-col gap-2'>
             <li className='hover:underline cursor-pointer'>Shop</li>
@@ -48,20 +50,21 @@ const Footer = () => {
             <li className='hover:underline cursor-pointer'>ANIMAL</li>
           </ul>
         </div>
-        <div className='h-full w-1/5 flex flex-col gap-6 mt-20 items-start '>
+        {/* Get in Touch */}
+        <div className='h-full md:w-1/5 w-full flex flex-col md:gap-6 gap-3 md:mt-20 mt-8 items-start justify-start '>
           <h1 className='font-bold text-2xl border-b-3 border-red-800'>Get in Touch</h1>
           <p><span className='font-semibold'>Address :</span>
             788, Global Industrial Area Sector 72, Faridabad</p>
           <p><span className='font-semibold'>Rahul Bhati :</span>+91 9311032091</p>
         </div>
-        <div className=' w-1/5 flex flex-col gap-6 mt-20 items-start'>
+        <div className=' md:w-1/5 w-full flex flex-col gap-6 md:mt-20 mt-8 items-start'>
         <h1 className='font-bold text-2xl border-b-3 border-red-800'> Map</h1>
 
         <LocationMap/>
         </div>
       </footer>
-      <div className='w-full h-[60px] mt-4 text-[15px] text-gray-700'>
-        <ul className='flex gap-8 items-center justify-center'>
+      <div className='w-full h-[60px] mt-4 md:text-[15px] text-[8px] text-gray-700'>
+        <ul className='flex md:gap-8 gap-4 items-center justify-center'>
           <li className='copyright'>2025,THE INDIAN HOME</li>
           <li>Refund policy</li>
           <li>Privacy policy</li>
