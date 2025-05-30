@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useContext } from 'react'
 import { AnimatePresence, motion } from "framer-motion";
 import Header from '../Components/Header'
@@ -88,8 +89,38 @@ const HomePage = () => {
             {/* Footer */}
             <Footer />
             
+=======
+import React from 'react'
+import Header from '../Components/Header'
+import Footer from '../Components/Footer'
+import Categories from '../Components/Categories'
+import homeimage from "../assets/homeimage.webp"
+import Slider from '../Components/ImageSlider'
+import Review from '../Components/Review'
+
+const MainPage = () => {
+    return (
+        <div>
+            <Header />
+            <Categories />
+            <Slider />
+
+        
+            
+            
+            <div>
+                <img src={homeimage} alt="" />
+            </div>
+            <Review/>
+            
+            <Footer />
+>>>>>>> bead919e19f2ac5de2407f429dbc33e5b543d11b
         </div>
     )
 }
 
+<<<<<<< HEAD
 export default HomePage
+=======
+export default MainPage
+>>>>>>> bead919e19f2ac5de2407f429dbc33e5b543d11b
