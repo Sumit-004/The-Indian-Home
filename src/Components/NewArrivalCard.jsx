@@ -47,7 +47,7 @@ const NewArrivalCard = () => {
                 >
                     {extendedCards.map((card, index) => (
                         <div className='md:my-4 my-3'>
-                            <div className='md:h-[320px] md:w-[280px] h-[180px] w-[140px] bg-[#ecd9a0] text-[#332D56] md:p-4 p-2 flex flex-col mx-8'>
+                            <div className='md:h-[320px] md:w-[280px] h-[180px] w-[140px] bg-[#eddaa0] text-[#332D56] md:p-4 p-2 flex flex-col mx-8'>
                                 <div className='w-full h-[55%] overflow-hidden'>
                                     <img src={img} alt="" className='w-full h-full object-fit hover:scale-110 transition-all duration-200' />
                                 </div>

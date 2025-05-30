@@ -11,20 +11,13 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
-<<<<<<< HEAD
     "framer-motion": "^12.15.0",
-=======
->>>>>>> bead919e19f2ac5de2407f429dbc33e5b543d11b
     "leaflet": "^1.9.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
-<<<<<<< HEAD
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.6.1"
-=======
-    "react-leaflet": "^5.0.0"
->>>>>>> bead919e19f2ac5de2407f429dbc33e5b543d11b
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
