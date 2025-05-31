@@ -3,31 +3,31 @@ import React, { useState, useEffect, useRef } from "react";
 const reviews = [
   {
     id: 1,
-    author: "Alice",
+    author: "Shivank Verma",
     text: "Amazing product! Highly recommend.",
     rating: 5,
   },
   {
     id: 2,
-    author: "Bob",
+    author: "Ankit Rathi",
     text: "Good quality and fast delivery.",
     rating: 4,
   },
   {
     id: 3,
-    author: "Carol",
+    author: "Digvesh",
     text: "Customer service was very helpful.",
     rating: 4,
   },
   {
     id: 4,
-    author: "David",
+    author: "Kartik Yadav",
     text: "Will buy again for sure!",
     rating: 5,
   },
   {
     id: 5,
-    author: "Eva",
+    author: "Rajat Sharma",
     text: "Exceeded my expectations!",
     rating: 5,
   },

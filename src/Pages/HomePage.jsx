@@ -6,6 +6,7 @@ import Categories from '../Components/Categories'
 import NewArrivalCard from '../Components/NewArrivalCard';
 import ImageSlider from '../Components/ImageSlider'
 import homeimage from "../assets/homeimage.webp"
+import Explore from '../Components/Explore';
 import { dataContext } from '../Context/UserContext'
 import { items } from '../items';
 import { useState } from 'react'
@@ -37,7 +38,7 @@ const HomePage = () => {
                     <h1 className='text-3xl font-bold flex items-center justify-center'>Log In</h1>
                     <button className='fixed top-0 right-0 bg-[#FE5D26] p-2 cursor-pointer' onClick={() => { setShowSignIn(false) }}><RxCross2 /></button>
                     <div className='flex flex-col gap-2'>
-                        <div className='flex text-[17px] gap-2 items-center justify-center'><MdOutlineEmail className='font-bold text-2xl' /><input className='w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-600' required type="email" placeholder='xyz.@example.com' /></div>
+                        <div className='flex text-[17px] gap-2 items-center justify-center'><MdOutlineEmail className='font-bold text-2xl' /><input className='w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-600' required type="email" placeholder='xyz123@gmail.com' /></div>
                         <div className='flex text-[17px] gap-2 items-center justify-center'><RiLockPasswordLine className='font-bold text-2xl' /><input className='w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-600' required type="password" placeholder='######' /></div>
                         <span className='text-blue-800 ml-7 cursor-pointer underline hover:text-black'>Forgot Your Password?</span>
                     </div>
@@ -60,7 +61,7 @@ const HomePage = () => {
                     <button className='fixed top-0 right-0 bg-[#FE5D26] p-2 cursor-pointer' onClick={() => { setShowRegister(false) }}><RxCross2 /></button>
                     <div className='flex flex-col gap-2'>
                         <div className='flex text-[17px] gap-2 items-center justify-center'><FaRegUser className='font-bold text-2xl' /><input className='w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-600' required type="text" placeholder='Enter full name' /></div>
-                        <div className='flex text-[17px] gap-2 items-center justify-center'><MdOutlineEmail className='font-bold text-2xl' /><input className='w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-600' required type="email" placeholder='xyz.@example.com' /></div>
+                        <div className='flex text-[17px] gap-2 items-center justify-center'><MdOutlineEmail className='font-bold text-2xl' /><input className='w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-600' required type="email" placeholder='xyz123@gmail.com' /></div>
                         <div className='flex text-[17px] gap-2 items-center justify-center'><RiLockPasswordLine className='font-bold text-2xl' /><input className='w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-600' required type="password" placeholder='Enter password' /></div>
                         <div className='flex text-[17px] gap-2 items-center justify-center'><RiLockPasswordLine className='font-bold text-2xl' /><input className='w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-600' required type="password" placeholder='Re-enter password' /></div>
                         <span className='ml-7 flex gap-1'><input type="checkbox" name="" id="" />Remember Me</span>
@@ -72,7 +73,7 @@ const HomePage = () => {
 
             {/* Categories Section */}
             <Categories />
-
+            <Explore/>
             <div>
                 <img src={homeimage} alt="" />
             </div>
