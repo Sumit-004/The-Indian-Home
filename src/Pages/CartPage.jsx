@@ -3,6 +3,8 @@ import { RxCross2 } from "react-icons/rx";
 import homeimage from "../assets/homeimage.webp"
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { DecreamentQty, IncreamentQty, RemoveItem } from '../redux/cartSlice';
 
 
 const CartPage = () => {
@@ -11,6 +13,9 @@ const CartPage = () => {
     const handleClose = () => {
         navigate(-1);
     };
+
+    let dispatch=useDispatch();
+
 
     return (
         <div className='md:h-[100vw] h-[100dvh] bg-amber-200'>
@@ -33,11 +38,11 @@ const CartPage = () => {
                             </div>
                             <div className="md:space-y-10 space-y-3">
                                 <div className="flex items-center space-x-2">
-                                    <button className="md:px-3 px-2 md:py-2 py-1 bg-gray-200 rounded hover:bg-gray-300">−</button>
+                                    <button className="md:px-3 px-2 md:py-2 py-1 bg-gray-200 rounded hover:bg-gray-300" onClick={()=>{qty>1?dispatch(DecreamentQty(id)):1}}>−</button>
                                     <span className="text-md font-medium md:font-semibold">1</span>
-                                    <button className="md:px-3 px-2 md:py-2 py-1 bg-gray-200 rounded hover:bg-gray-300">+</button>
+                                    <button className="md:px-3 px-2 md:py-2 py-1 bg-gray-200 rounded hover:bg-gray-300" onClick={()=>{dispatch(IncreamentQty(id))}}>+</button>
                                 </div>
-                                <button className='w-full flex justify-end'><RiDeleteBinLine className='md:text-2xl text-xl text-red-700 cursor-pointer' /></button>
+                                <button className='w-full flex justify-end'><RiDeleteBinLine className='md:text-2xl text-xl text-red-700 cursor-pointer'  onClick={()=>dispatch(RemoveItem(id))}/></button>
                             </div>
                         </div>
                     </div>

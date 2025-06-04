@@ -1,13 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext , useEffect} from 'react'
 import { AnimatePresence, motion } from "framer-motion";
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import Categories from '../Components/Categories'
 import NewArrivalCard from '../Components/NewArrivalCard';
 import ImageSlider from '../Components/ImageSlider'
+import Slider from '../Components/Slider'
 import homeimage from "../assets/homeimage.webp"
 import Explore from '../Components/Explore';
 import { dataContext } from '../Context/UserContext'
+import { useSelector } from 'react-redux';
 import { items } from '../items';
 import { useState } from 'react'
 import Review from '../Components/Review'
@@ -22,12 +24,27 @@ import { RxCross2 } from "react-icons/rx";
 const HomePage = () => {
     let { showSignIn, setShowSignIn, showRegister, setShowRegister, cate, setCate, } = useContext(dataContext)
 
+    useEffect(() => {
+    if (showSignIn || showRegister) {
+      document.body.style.overflow = 'hidden'; // Disable scroll
+    } else {
+      document.body.style.overflow = 'auto'; // Enable scroll
+    }
+
+    // Clean up on unmount
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [showSignIn , showRegister]);
+
+
+
 
     return (
         <div>
-            <Header />
+            <header className=''><Header /></header>
             {/* SignIn */}
-            <div className={`${showSignIn ? ' flex justify-center absolute w-full h-full bg-transparent backdrop-blur-[20px] transition-all' : ""}`}>
+            <div className={`${showSignIn ? 'flex justify-center absolute overflow-hidden w-full h-full bg-transparent backdrop-blur-[20px] transition-all' : ""}`}>
 
                 {showSignIn && (<motion.div
                     initial={{ y: -200, opacity: 0 }}
@@ -73,24 +90,28 @@ const HomePage = () => {
 
             {/* Categories Section */}
             <Categories />
-            <Explore/>
+
+            <Explore />
             <div>
                 <img src={homeimage} alt="" />
             </div>
             {/* New Arrival Section */}
             <section className='w-full h-auto bg-[#FAFFCA] my-4'>
-            <h1 className='flex justify-center md:text-5xl text-3xl my-4 pt-5 font-semibold'>NEW ARRIVALS</h1>
-            <div className='w-full flex flex-wrap justify-center md:mx-5 md:gap-10 gap-3'>
-                <NewArrivalCard />
-            </div>
+                <h1 className='flex justify-center md:text-5xl text-3xl my-4 pt-5 font-semibold'>NEW ARRIVALS</h1>
+                <div className='w-full flex flex-wrap justify-center md:mx-5 md:gap-10 gap-3'>
+                    <NewArrivalCard />
+                </div>
             </section>
 
             {/* Image Slider */}
-            <ImageSlider />
-                    <Review/>
+            {/* <ImageSlider /> */}
+            <div className='my-6'>
+                <Slider />
+            </div>
+            <Review />
             {/* Footer */}
             <Footer />
-            
+
         </div>
     )
 }
