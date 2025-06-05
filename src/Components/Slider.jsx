@@ -65,12 +65,12 @@ const Slider = () => {
               alt={slide.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute z-20 text-black p-6 md:p-12 max-w-md md:max-w-xl">
+            <div className="absolute z-20 text-red-800 p-6 md:p-12 max-w-md md:max-w-xl">
               <span className="bg-black text-white text-sm font-semibold px-3 py-1 rounded-full mb-2 inline-block">
                 {slide.category}
               </span>
               <h2 className="text-3xl md:text-5xl font-bold mb-3">{slide.title}</h2>
-              <p className="text-lg mb-6">{slide.description}</p>
+              <p className="text-lg mb-6 font-semibold">{slide.description}</p>
               <button className="bg-black text-white font-semibold px-6 py-2 rounded-lg hover:bg-gray-800 transition">
                 Shop Now
               </button>

@@ -1,4 +1,6 @@
 import React from 'react'
+import { toast } from 'react-hot-toast';
+
 import new1 from '../assets/newarrival/new1.jpg'
 import new2 from '../assets/newarrival/new2.jpg'
 import new3 from '../assets/newarrival/new3.jpg'
@@ -7,6 +9,8 @@ import new5 from '../assets/newarrival/new5.jpg'
 import new6 from '../assets/newarrival/new6.jpg'
 import new7 from '../assets/newarrival/new7.jpg'
 import new8 from '../assets/newarrival/new8.jpg'
+import { useDispatch } from 'react-redux';
+import { AddItem } from '../redux/cartSlice';
 
 import { useRef, useEffect } from 'react';
 
@@ -44,7 +48,7 @@ const NewArrivalCard = () => {
 
     const extendedCards = [...newItem, ...newItem.slice(0, 4)];
 
-
+    const dispatch=useDispatch();
 
     return (
         <>
@@ -69,7 +73,7 @@ const NewArrivalCard = () => {
                                         <span className='font-semibold'>Rs. {card.price}/-</span>
                                     </div>
                                     <div className='flex justify-center'>
-                                        <button className='bg-blue-900 md:text-[14px] text-[10px] px-2 py-1 text-white rounded-sm hover:bg-blue-700 transition-all duration-200 cursor-pointer'>Add+</button>
+                                        <button className='bg-blue-900 md:text-[14px] text-[10px] px-2 py-1 text-white rounded-sm hover:bg-blue-700 transition-all duration-200 cursor-pointer' onClick={()=>{dispatch(AddItem({id:card.id,name:card.description,image:card.item_image,price:card.price,qty:card.item_quantity}));toast.success('Added to Cart!')}}>Add+</button>
                                     </div>
                                 </div>
                             </div>

@@ -6,17 +6,17 @@ import ReactDOM from 'react-dom/client';
 import UserContext from './Context/UserContext.jsx'
 import App from './App.jsx'
 import { Provider } from 'react-redux'
-import {store} from './redux/store.js'
+import { store } from './redux/store.js'
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
     <Provider store={store}>
-    <UserContext>
-    <App />
-    </UserContext>
+      <UserContext>
+        <StrictMode>
+          <App />
+        </StrictMode>,
+      </UserContext>
     </Provider>
-    </BrowserRouter>
-  </StrictMode>,
+  </BrowserRouter>
 )

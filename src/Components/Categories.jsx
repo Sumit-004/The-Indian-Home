@@ -40,7 +40,7 @@ const Categories = () => {
     return (
         <>
         
-            <div className='flex justify-center w-full h-auto my-4'>
+            <div className='flex justify-center w-full h-auto mt-22'>
                 <h1 className='flex justify-center md:text-4xl text-3x pt-5 font-semibold'>Categories</h1>
             </div>
             <div className='flex flex-wrap md:gap-15 gap-3 md:justify-center justify-evenly my-6'>

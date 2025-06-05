@@ -1,4 +1,4 @@
-import React, { useContext , useEffect} from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AnimatePresence, motion } from "framer-motion";
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
@@ -6,6 +6,7 @@ import Categories from '../Components/Categories'
 import NewArrivalCard from '../Components/NewArrivalCard';
 import ImageSlider from '../Components/ImageSlider'
 import Slider from '../Components/Slider'
+import AllItem from './AllItem';
 import homeimage from "../assets/homeimage.webp"
 import Explore from '../Components/Explore';
 import { dataContext } from '../Context/UserContext'
@@ -22,21 +23,20 @@ import { RxCross2 } from "react-icons/rx";
 
 
 const HomePage = () => {
-    let { showSignIn, setShowSignIn, showRegister, setShowRegister, cate, setCate, } = useContext(dataContext)
+    let { showSignIn, setShowSignIn, showRegister, setShowRegister, input } = useContext(dataContext)
 
     useEffect(() => {
-    if (showSignIn || showRegister) {
-      document.body.style.overflow = 'hidden'; // Disable scroll
-    } else {
-      document.body.style.overflow = 'auto'; // Enable scroll
-    }
+        if (showSignIn || showRegister) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
 
-    // Clean up on unmount
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [showSignIn , showRegister]);
-
+        // Clean up on unmount
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [showSignIn, showRegister]);
 
 
 
@@ -44,7 +44,7 @@ const HomePage = () => {
         <div>
             <header className=''><Header /></header>
             {/* SignIn */}
-            <div className={`${showSignIn ? 'flex justify-center absolute overflow-hidden w-full h-full bg-transparent backdrop-blur-[20px] transition-all' : ""}`}>
+            <div className={`${showSignIn ? 'flex justify-center items-center absolute overflow-hidden w-full h-full bg-transparent backdrop-blur-[20px] transition-all' : ""}`}>
 
                 {showSignIn && (<motion.div
                     initial={{ y: -200, opacity: 0 }}
@@ -66,7 +66,7 @@ const HomePage = () => {
 
             </div>
             {/* Register */}
-            <div className={`${showRegister ? ' flex justify-center absolute w-full h-full bg-transparent backdrop-blur-[20px]' : ""}`}>
+            <div className={`${showRegister ? ' flex justify-center items-center absolute w-full h-full bg-transparent backdrop-blur-[20px]' : ""}`}>
 
                 {showRegister && (<motion.div
                     initial={{ x: -200, opacity: 0 }}
@@ -90,8 +90,11 @@ const HomePage = () => {
 
             {/* Categories Section */}
             <Categories />
+            {input ? <AllItem /> : <Explore />}
 
-            <Explore />
+
+
+            
             <div>
                 <img src={homeimage} alt="" />
             </div>

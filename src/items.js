@@ -42,15 +42,13 @@ export const items = [
     { "id": 2, "description": "This is an item", "item_category": "ShowPiece", "item_quantity": 1, "item_image": img, "price": 149 },
     { "id": 3, "description": "This is an item", "item_category": "ShowPiece", "item_quantity": 1, "item_image": img, "price": 199 },
     { "id": 4, "description": "This is an item", "item_category": "Vases", "item_quantity": 1, "item_image": img, "price": 139 },
-    { "id": 5, "description": "This is an item", "item_category": "CupSet", "item_quantity": 1, "item_image": cup1, "price": 139 },
+    { "id": 5, "description": "Cups with plate", "item_category": "CupSet", "item_quantity": 1, "item_image": cup1, "price": 139 },
     { "id": 6, "description": "This is an item", "item_category": "CupSet", "item_quantity": 1, "item_image": cup2, "price": 139 },
-
-    { "id": 7, "description": "This is an item", "item_category": "Vases", "item_quantity": 1, "item_image": img, "price": 89 },
+    { "id": 7, "description": "Home Decore", "item_category": "Vases", "item_quantity": 1, "item_image": img, "price": 89 },
     { "id": 8, "description": "This is an item", "item_category": "Vases", "item_quantity": 1, "item_image": img, "price": 149 },
     { "id": 9, "description": "This is an item", "item_category": "HomeDecor", "item_quantity": 1, "item_image": home1, "price": 139 },
     { "id": 10, "description": "This is an item", "item_category": "HomeDecor", "item_quantity": 1, "item_image": home2, "price": 99 },
     { "id": 11, "description": "This is an item", "item_category": "CupSet", "item_quantity": 1, "item_image": cup3, "price": 139 },
-
     { "id": 12, "description": "This is an item", "item_category": "KitchenWare", "item_quantity": 1, "item_image": img, "price": 149 },
     { "id": 13, "description": "This is an item", "item_category": "KitchenWare", "item_quantity": 1, "item_image": img, "price": 139 },
     { "id": 26, "description": "This is an item", "item_category": "CupSet", "item_quantity": 1, "item_image": cup4, "price": 139 },

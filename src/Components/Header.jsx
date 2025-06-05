@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext ,useEffect} from 'react';
+import { items } from '../items';
 import { dataContext } from '../Context/UserContext'
 import { useNavigate } from 'react-router-dom';
 import { TiShoppingCart } from 'react-icons/ti';
@@ -6,24 +7,30 @@ import { CiSearch } from 'react-icons/ci';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { FaUser } from 'react-icons/fa';
 import logo from '../assets/logo1.png';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/CartPage'); 
+    navigate('/CartPage');
   };
 
-  let { showSignIn, setShowSignIn, } = useContext(dataContext)
+  let { showSignIn, setShowSignIn, input, setInput, setCate } = useContext(dataContext)
+useEffect(()=>{
+        let newList=items.filter((item)=>item.description.includes(input)||item.description.toLowerCase().includes(input))
+        setCate(newList)
+    },[input])
 
 
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const cart = useSelector(state => state.cart);
+
   return (
-    <header className="bg-[#FAFFCA] shadow-md">
-      <div className="flex justify-between items-center h-20 px-6 md:px-10 md:mx-2 mx-4">
+    <header className="fixed top-0 w-full z-20 bg-[#FAFFCA] shadow-md">
+      <div className="flex justify-between items-center h-22 px-6 md:px-10 md:mx-3 mx-4">
         {/* Logo */}
         <div className="h-16 w-16 md:h-20 md:w-20">
           <img className="rounded-full object-cover" src={logo} alt="Logo" />
@@ -31,31 +38,32 @@ const navigate = useNavigate();
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex flex-grow justify-center">
-          <ul className="flex gap-6 text-sm font-medium">
+          <ul className="flex gap-8 text-sm font-medium">
             <li>DECOR</li>
             <li>DRINKWARE</li>
             <li>TABLEWARE</li>
             <li>HOME ESSENTIALS</li>
             <li>SALE COMBO</li>
-            <li>WOMEN ACCESSORIES</li>
           </ul>
         </nav>
 
         {/* Desktop Icons */}
         <div className="hidden md:flex items-center gap-6">
           {/* Search */}
-          <div className="relative">
-            <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
-            <input
-              type="text"
-              placeholder="Search Item"
-              className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-200 shadow-sm w-64"
-            />
-          </div>
-
+          <form action="" onSubmit={(e) => e.preventDefault()}>
+            <div className="relative">
+              <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+              <input
+                type="text"
+                placeholder="Search Item"
+                className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-200 shadow-sm w-64"
+                onChange={(e) => setInput(e.target.value)} value={input} />
+            </div>
+          </form>
           {/* Order */}
-          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={handleClick}>
+          <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={handleClick}>
             <TiShoppingCart className="text-2xl" />
+            <span className='absolute -top-4 left-5 font-semibold'>{cart.length}</span>
             <span className="font-medium">Order</span>
           </div>
 
@@ -78,7 +86,7 @@ const navigate = useNavigate();
           } transition-transform duration-300 ease-in-out shadow-lg`}
       >
         <div className="flex justify-between items-center p-5 border-b">
-          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={() => { setShowSignIn(true),toggleMenu(false) }}>
+          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={() => { setShowSignIn(true), toggleMenu(false) }}>
             <FaUser className="text-lg" />
             <span className="font-medium">Sign In</span>
           </div>
@@ -103,15 +111,15 @@ const navigate = useNavigate();
           <li>TABLEWARE</li>
           <li>HOME ESSENTIALS</li>
           <li>SALE COMBO</li>
-          <li>WOMEN ACCESSORIES</li>
           <hr />
         </ul>
 
 
         {/* Mobile Icons */}
         <div className="flex flex-col gap-4 px-6 mt-2">
-          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={handleClick}>
+          <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={handleClick}>
             <TiShoppingCart className="text-xl" />
+            <span className='absolute -top-2 left-4 text-[13px] font-semibold'>{cart.length}</span>
             <span className="font-medium">Order</span>
           </div>
         </div>
