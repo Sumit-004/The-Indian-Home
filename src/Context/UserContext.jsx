@@ -9,7 +9,8 @@ function UserContext({ children }) {
   let [showSignIn, setShowSignIn] = useState(false)
   let [showRegister, setShowRegister] = useState(false)
   let [cate, setCate] = useState(items)
-      let [input,setInput]=useState("") 
+  let [input, setInput] = useState("")
+  let [cateSelect, setCateSelect] = useState(false)
 
   // let [newCate, setNewCate] = useState(newItem)
   let [showCart, setShowCart] = useState(false)
@@ -23,8 +24,10 @@ function UserContext({ children }) {
     setShowRegister,
     cate,
     setCate,
-    showCart, 
+    showCart,
     setShowCart,
+    cateSelect,
+    setCateSelect,
     // newCate,
     // setNewCate,
   }

@@ -1,4 +1,4 @@
-import React, { useState, useContext ,useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { items } from '../items';
 import { dataContext } from '../Context/UserContext'
 import { useNavigate } from 'react-router-dom';
@@ -16,11 +16,18 @@ const Header = () => {
     navigate('/CartPage');
   };
 
-  let { showSignIn, setShowSignIn, input, setInput, setCate } = useContext(dataContext)
-useEffect(()=>{
-        let newList=items.filter((item)=>item.description.includes(input)||item.description.toLowerCase().includes(input))
-        setCate(newList)
-    },[input])
+  let { showSignIn, setShowSignIn, input, setInput, setCate, cateSelect, setCateSelect } = useContext(dataContext)
+  useEffect(() => {
+    let newList = items.filter((item) => item.description.includes(input) || item.description.toLowerCase().includes(input))
+    setCate(newList)
+  }, [input])
+
+
+  function choice(category) {
+    let newList = items.filter((item) => (item.item_category === category))
+    setCate(newList)
+
+  }
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -39,11 +46,11 @@ useEffect(()=>{
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex flex-grow justify-center">
           <ul className="flex gap-8 text-sm font-medium">
-            <li>DECOR</li>
-            <li>DRINKWARE</li>
-            <li>TABLEWARE</li>
-            <li>HOME ESSENTIALS</li>
-            <li>SALE COMBO</li>
+            <li className='hover:underline cursor-pointer' onClick={() => {choice("ShowPiece");setCateSelect(true)}}>SHOW PIECES</li>
+            <li className='hover:underline cursor-pointer' onClick={() => {choice("CupSet");setCateSelect(true)}}>CUPS & COFFEE MUGS</li>
+            <li className='hover:underline cursor-pointer'>TABLEWARE</li>
+            <li className='hover:underline cursor-pointer'>HOME ESSENTIALS</li>
+            {/* <li className='hover:underline cursor-pointer'>SALE COMBO</li> */}
           </ul>
         </nav>
 

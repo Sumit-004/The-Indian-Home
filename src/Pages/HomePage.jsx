@@ -23,7 +23,7 @@ import { RxCross2 } from "react-icons/rx";
 
 
 const HomePage = () => {
-    let { showSignIn, setShowSignIn, showRegister, setShowRegister, input } = useContext(dataContext)
+    let { showSignIn, setShowSignIn, showRegister, setShowRegister, input, cateSelect } = useContext(dataContext)
 
     useEffect(() => {
         if (showSignIn || showRegister) {
@@ -90,7 +90,7 @@ const HomePage = () => {
 
             {/* Categories Section */}
             <Categories />
-            {input ? <AllItem /> : <Explore />}
+            {input ||cateSelect ? <AllItem /> : <Explore />}
 
 
 

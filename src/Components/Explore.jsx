@@ -13,11 +13,11 @@ import img7 from '../assets/homedecor/img3.jpg'
 import img8 from '../assets/newarrival/new2.jpg'
 
 const newItem = [
-    { "id": 1, "description": "The Lover Ornaments for Home Statues Couple Hug", "item_category": "TableWare", "item_quantity": 1, "item_image": img1, "price": 199 },
+    { "id": 1, "description": "Kitchen Assessories", "item_category": "TableWare", "item_quantity": 1, "item_image": img1, "price": 199 },
     { "id": 2, "description": "This is an item", "item_category": "ShowPiece", "item_quantity": 1, "item_image": img2, "price": 149 },
     { "id": 3, "description": "This is an item", "item_category": "ShowPiece", "item_quantity": 1, "item_image": img3, "price": 199 },
     { "id": 4, "description": "This is an item", "item_category": "Vases", "item_quantity": 1, "item_image": img4, "price": 139 },
-    { "id": 5, "description": "This is an item", "item_category": "CupSet", "item_quantity": 1, "item_image": img5, "price": 139 },
+    { "id": 5, "description": "Europian Style Abstract Family Statue", "item_category": "CupSet", "item_quantity": 1, "item_image": img5, "price": 139 },
     { "id": 6, "description": "This is an item", "item_category": "CupSet", "item_quantity": 1, "item_image": img6, "price": 139 },
     { "id": 7, "description": "This is an item", "item_category": "CupSet", "item_quantity": 1, "item_image": img7, "price": 139 },
     { "id": 8, "description": "This is an item", "item_category": "Vases", "item_quantity": 1, "item_image": img8, "price": 139 },
