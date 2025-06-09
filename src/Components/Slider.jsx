@@ -63,9 +63,9 @@ const Slider = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover opacity-75"
             />
-            <div className="absolute z-20 text-red-800 p-6 md:p-12 max-w-md md:max-w-xl">
+            <div className="absolute z-20 text-gray-900 p-6 md:p-12 max-w-md md:max-w-xl">
               <span className="bg-black text-white text-sm font-semibold px-3 py-1 rounded-full mb-2 inline-block">
                 {slide.category}
               </span>
@@ -82,17 +82,17 @@ const Slider = () => {
       {/* Navigation arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full z-30 hover:bg-opacity-100 transition"
+        className="absolute md:left-4 left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full z-30 hover:bg-opacity-100 transition"
         aria-label="Previous slide"
       >
-        <FiChevronLeft size={24} />
+        <FiChevronLeft className='md:text-[18px] text-[12px]'/>
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full z-30 hover:bg-opacity-100 transition"
+        className="absolute md:right-4 right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full z-30 hover:bg-opacity-100 transition"
         aria-label="Next slide"
       >
-        <FiChevronRight size={24} />
+        <FiChevronRight className='md:text-[18px] text-[12px]'/>
       </button>
       
       {/* Slide indicators */}

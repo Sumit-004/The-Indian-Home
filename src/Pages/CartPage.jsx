@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddItem } from '../redux/cartSlice';
 import { RemoveItem, DecreamentQty, IncreamentQty } from '../redux/cartSlice';
+import Details from './Details';
 
 const CartPage = () => {
     const navigate = useNavigate();
@@ -80,11 +81,18 @@ const CartPage = () => {
                             </div>
                         </div>
                     </div >
+                    {/* <div className="w-[70%] flex justify-end items-center">
+                        <button className="mt-4 md:px-2 md:py-1 p-1 text-[12px] md:text-[18px] bg-yellow-500 text-white rounded-lg hover:bg-yellow-700 transition">
+                            Save Your Address
+                        </button>
+                        </div> */}
                     <div className="w-[70%] flex justify-end items-center">
                         <button className="mt-4 md:px-2 md:py-1 p-1 text-[12px] md:text-[18px] bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
                             Proceed For Payment
                         </button>
-                    </div></>
+                    </div>
+                    {/* <Details/> */}
+                    </>
                     : <div className="bg-white flex flex-col justify-center items-center shadow-lg rounded-xl p-4 space-y-4 w-full max-w-2xl mx-auto">
                         <div className="w-[50%] sm:w-[70%] md:w-[60%] lg:w-[50%] aspect-square flex items-center justify-center overflow-hidden">
                             <img src={emptycart} alt="Empty Cart" className="h-full w-full object-contain" />

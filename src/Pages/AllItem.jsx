@@ -20,7 +20,7 @@ const AllItem = () => {
       <div className='flex flex-wrap justify-center w-full md:mx-4 mx-1 mt-25'>
         {cate.map((card) => (
           <div className='md:my-4 my-2'>
-            <div className=' md:h-[320px] md:w-[280px] h-[185px] w-[140px] bg-[#E7EFC7] md:p-2 p-0 flex flex-col md:mx-6 mx-2.5'>
+            <div className=' md:h-[320px] md:w-[280px] h-[188px] w-[140px] bg-[#E7EFC7] md:p-2 p-0 flex flex-col md:mx-6 mx-2.5'>
               <div className='md:h-[77%] h-[65%] w-full overflow-hidden'>
                 <img src={card.item_image} alt="" className='object-hit h-full w-full hover:scale-107 transition-all duration-200' />
               </div>

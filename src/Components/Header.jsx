@@ -11,89 +11,128 @@ import { useSelector } from 'react-redux';
 
 const Header = () => {
   const navigate = useNavigate();
+  const handleClick = () => navigate('/CartPage');
+  const cart = useSelector(state => state.cart);
 
-  const handleClick = () => {
-    navigate('/CartPage');
-  };
-
-  let { showSignIn, setShowSignIn, input, setInput, setCate, cateSelect, setCateSelect } = useContext(dataContext)
-  useEffect(() => {
-    let newList = items.filter((item) => item.description.includes(input) || item.description.toLowerCase().includes(input))
-    setCate(newList)
-  }, [input])
-
-
-  function choice(category) {
-    let newList = items.filter((item) => (item.item_category === category))
-    setCate(newList)
-
-  }
-
+  const {
+    showSignIn,
+    setShowSignIn,
+    input,
+    setInput,
+    setCate,
+    cateSelect,
+    setCateSelect
+  } = useContext(dataContext);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const cart = useSelector(state => state.cart);
+  useEffect(() => {
+    const newList = items.filter((item) =>
+      item.description.toLowerCase().includes(input.toLowerCase())
+    );
+    setCate(newList);
+  }, [input]);
+
+  function choice(category) {
+    const newList = items.filter((item) => item.item_category === category);
+    setCate(newList);
+  }
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 w-full z-20 bg-[#FAFFCA] shadow-md">
-      <div className="flex justify-between items-center h-22 px-6 md:px-10 md:mx-3 mx-4">
+    <header
+      className={`fixed top-0 w-full z-50 bg-[#FAFFCA] transition-all duration-300 ease-in-out ${isScrolled ? 'py-0 shadow-lg backdrop-blur-sm bg-opacity-90' : 'py-2 shadow-md'
+        }`}
+    >
+      {/* Top Bar */}
+      <div className="flex items-center justify-between md:h-20 h-17 px-4 md:px-10 md:mx-3 mx-2 space-x-4">
+
         {/* Logo */}
-        <div className="h-16 w-16 md:h-20 md:w-20">
+        <div className="h-14 w-14 md:h-20 md:w-20 flex-shrink-0">
           <img className="rounded-full object-cover" src={logo} alt="Logo" />
         </div>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden md:flex flex-grow justify-center">
-          <ul className="flex gap-8 text-sm font-medium">
-            <li className='hover:underline cursor-pointer' onClick={() => {choice("ShowPiece");setCateSelect(true)}}>SHOW PIECES</li>
-            <li className='hover:underline cursor-pointer' onClick={() => {choice("CupSet");setCateSelect(true)}}>CUPS & COFFEE MUGS</li>
-            <li className='hover:underline cursor-pointer'>TABLEWARE</li>
-            <li className='hover:underline cursor-pointer'>HOME ESSENTIALS</li>
-            {/* <li className='hover:underline cursor-pointer'>SALE COMBO</li> */}
-          </ul>
-        </nav>
-
-        {/* Desktop Icons */}
-        <div className="hidden md:flex items-center gap-6">
-          {/* Search */}
-          <form action="" onSubmit={(e) => e.preventDefault()}>
-            <div className="relative">
-              <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
-              <input
-                type="text"
-                placeholder="Search Item"
-                className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-200 shadow-sm w-64"
-                onChange={(e) => setInput(e.target.value)} value={input} />
-            </div>
-          </form>
-          {/* Order */}
-          <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={handleClick}>
-            <TiShoppingCart className="text-2xl" />
-            <span className='absolute -top-4 left-5 font-semibold'>{cart.length}</span>
-            <span className="font-medium">Order</span>
+        {/* Mobile Search (centered between logo and toggle) */}
+        <form className="flex-grow md:hidden" onSubmit={(e) => e.preventDefault()}>
+          <div className="relative w-full">
+            <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+            <input
+              type="text"
+              placeholder="Search"
+              className="pl-10 pr-4 py-2 rounded-full border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-yellow-300 text-sm"
+              onChange={(e) => setInput(e.target.value)}
+              value={input}
+            />
           </div>
-
-          {/* Sign In */}
-          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={() => { setShowSignIn(true) }}>
-            <FaUser className="text-lg" />
-            <span className="font-medium">Sign In</span>
-          </div>
-        </div>
+        </form>
 
         {/* Mobile Menu Toggle */}
-        <button className="md:hidden text-2xl cursor-pointer" onClick={toggleMenu}>
+        <button className="md:hidden text-2xl cursor-pointer flex-shrink-0" onClick={toggleMenu}>
           {isOpen ? <HiX /> : <HiMenuAlt3 />}
         </button>
+
+        {/* Desktop Nav & Icons */}
+        <div className="hidden md:flex flex-grow justify-between items-center">
+          {/* Nav Links */}
+          <nav className="flex-grow flex justify-center">
+            <ul className="flex gap-8 text-sm font-medium">
+              <li className="hover:underline cursor-pointer" onClick={() => { choice("ShowPiece"); setCateSelect(true) }}>SHOW PIECES</li>
+              <li className="hover:underline cursor-pointer" onClick={() => { choice("CupSet"); setCateSelect(true) }}>CUPS & Set</li>
+              <li className="hover:underline cursor-pointer">TABLEWARE</li>
+              <li className="hover:underline cursor-pointer">HOME ESSENTIALS</li>
+            </ul>
+          </nav>
+
+          {/* Icons */}
+          <div className="flex items-center gap-6">
+            {/* Search (Desktop) */}
+            <form onSubmit={(e) => e.preventDefault()}>
+              <div className="relative">
+                <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+                <input
+                  type="text"
+                  placeholder="Search Item"
+                  className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-200 shadow-sm w-64"
+                  onChange={(e) => setInput(e.target.value)}
+                  value={input}
+                />
+              </div>
+            </form>
+
+            {/* Order Cart */}
+            <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={handleClick}>
+              <TiShoppingCart className="text-2xl" />
+              <span className="absolute -top-4 left-5 font-semibold">{cart.length}</span>
+              <span className="font-medium">Order</span>
+            </div>
+
+            {/* Sign In */}
+            <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={() => setShowSignIn(true)}>
+              <FaUser className="text-lg" />
+              <span className="font-medium">Sign In</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Mobile Slide Menu */}
-      <div
-        className={`md:hidden fixed top-0 right-0 h-full w-[70%] bg-[#FAFFCA] z-50 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
-          } transition-transform duration-300 ease-in-out shadow-lg`}
-      >
+      <div className={`md:hidden fixed top-0 right-0 h-full w-[70%] bg-[#FAFFCA] z-50 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out shadow-lg`}>
         <div className="flex justify-between items-center p-5 border-b">
-          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={() => { setShowSignIn(true), toggleMenu(false) }}>
+          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={() => { setShowSignIn(true); toggleMenu(false); }}>
             <FaUser className="text-lg" />
             <span className="font-medium">Sign In</span>
           </div>
@@ -102,31 +141,32 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Search */}
-        <div className="relative mt-4 px-4">
-          <CiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="pl-10 pr-4 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-200 shadow-sm"
-          />
-        </div>
+        {/* Mobile Search in Slide Menu (Optional) */}
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="relative mt-4 px-4">
+            <CiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="pl-10 pr-4 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-200 shadow-sm"
+              onChange={(e) => setInput(e.target.value)}
+              value={input}
+            />
+          </div>
+        </form>
 
         <ul className="flex flex-col gap-5 p-6 text-base font-medium">
           <li>DECOR</li>
-          <li>DRINKWARE</li>
+          <li>CUPS & Set</li>
           <li>TABLEWARE</li>
           <li>HOME ESSENTIALS</li>
-          <li>SALE COMBO</li>
           <hr />
         </ul>
 
-
-        {/* Mobile Icons */}
         <div className="flex flex-col gap-4 px-6 mt-2">
           <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={handleClick}>
             <TiShoppingCart className="text-xl" />
-            <span className='absolute -top-2 left-4 text-[13px] font-semibold'>{cart.length}</span>
+            <span className="absolute -top-2 left-4 text-[13px] font-semibold">{cart.length}</span>
             <span className="font-medium">Order</span>
           </div>
         </div>
