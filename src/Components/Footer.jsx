@@ -43,11 +43,8 @@ const Footer = () => {
             <li className='hover:underline cursor-pointer'>Clearance Sale</li>
             <li className='hover:underline cursor-pointer'>New Arrivals</li>
             <li className='hover:underline cursor-pointer'>Breakfast Set</li>
-            <li className='hover:underline cursor-pointer'>FRUITS</li>
             <li className='hover:underline cursor-pointer'>Collection</li>
-            <li className='hover:underline cursor-pointer'>Heart Collection</li>
             <li className='hover:underline cursor-pointer'>Bulk Buy</li>
-            <li className='hover:underline cursor-pointer'>ANIMAL</li>
           </ul>
         </div>
         {/* Get in Touch */}
@@ -58,9 +55,8 @@ const Footer = () => {
           <p><span className='font-semibold'>Rahul Bhati :</span>+91 9311032091</p>
         </div>
         <div className=' md:w-1/5 w-full flex flex-col gap-6 md:mt-20 mt-8 items-start'>
-        <h1 className='font-bold text-2xl border-b-3 border-red-800'> Map</h1>
-
-        <LocationMap/>
+          <h1 className='font-bold text-2xl border-b-3 border-red-800'> Map</h1>
+          <LocationMap/>
         </div>
       </footer>
       <div className='w-full h-[60px] mt-4 md:text-[15px] text-[8px] text-gray-700'>

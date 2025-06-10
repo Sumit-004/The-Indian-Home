@@ -19,7 +19,8 @@ export default function Map() {
   const position = [28.361405, 77.364880];
 
   return (
-    <div className="h-[300px] w-full rounded-xl overflow-hidden shadow-lg">
+    <div className="h-[300px] w-full rounded-xl overflow-hidden shadow-lg z-10 relative">
+
       <MapContainer center={position} zoom={13} scrollWheelZoom={false} className="h-full w-full">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'

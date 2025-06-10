@@ -15,11 +15,10 @@ const Header = () => {
   const cart = useSelector(state => state.cart);
 
   const {
-    showSignIn,
     setShowSignIn,
     input,
     setInput,
-    setCate,
+    setItem,
     cateSelect,
     setCateSelect
   } = useContext(dataContext);
@@ -28,15 +27,23 @@ const Header = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
+  if (isOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
+}, [isOpen]);
+
+  useEffect(() => {
     const newList = items.filter((item) =>
       item.description.toLowerCase().includes(input.toLowerCase())
     );
-    setCate(newList);
+    setItem(newList);
   }, [input]);
 
   function choice(category) {
     const newList = items.filter((item) => item.item_category === category);
-    setCate(newList);
+    setItem(newList);
   }
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -54,10 +61,10 @@ const Header = () => {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 w-full z-50 bg-[#FAFFCA] transition-all duration-300 ease-in-out ${isScrolled ? 'py-0 shadow-lg backdrop-blur-sm bg-opacity-90' : 'py-2 shadow-md'
-        }`}
-    >
+    <header className={`fixed top-0 w-full z-50 bg-[#FAFFCA] transition-all duration-300 ease-in-out ${
+  isScrolled && !isOpen ? 'py-0 shadow-lg bg-opacity-90' : 'py-2 shadow-md'
+}`}>
+
       {/* Top Bar */}
       <div className="flex items-center justify-between md:h-20 h-17 px-4 md:px-10 md:mx-3 mx-2 space-x-4">
 

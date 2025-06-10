@@ -1,35 +1,23 @@
 import React, { createContext, useState } from 'react'
 import { items } from '../items'
-// import { newItem } from '../newItem'
-
-
 export const dataContext = createContext()
 
 function UserContext({ children }) {
   let [showSignIn, setShowSignIn] = useState(false)
   let [showRegister, setShowRegister] = useState(false)
-  let [cate, setCate] = useState(items)
+  let [item, setItem] = useState(items)
   let [input, setInput] = useState("")
   let [cateSelect, setCateSelect] = useState(false)
-
-  // let [newCate, setNewCate] = useState(newItem)
   let [showCart, setShowCart] = useState(false)
 
   let data = {
-    input,
-    setInput,
-    showSignIn,
-    setShowSignIn,
-    showRegister,
-    setShowRegister,
-    cate,
-    setCate,
-    showCart,
-    setShowCart,
-    cateSelect,
-    setCateSelect,
-    // newCate,
-    // setNewCate,
+    input,setInput,
+    showSignIn,setShowSignIn,
+    showRegister,setShowRegister,
+    item, setItem,
+    showCart,setShowCart,
+    cateSelect,setCateSelect,
+    
   }
   return (
     <div>

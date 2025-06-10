@@ -1,13 +1,10 @@
 import React, { useContext } from 'react'
 import { RxCross2 } from "react-icons/rx";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { TbFaceIdError } from "react-icons/tb";
 import emptycart from '../assets/cart.jpg'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddItem } from '../redux/cartSlice';
 import { RemoveItem, DecreamentQty, IncreamentQty } from '../redux/cartSlice';
-import Details from './Details';
 
 const CartPage = () => {
     const navigate = useNavigate();

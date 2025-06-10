@@ -10,19 +10,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const App = () => {
   return (
     <>
-    <Toaster position='top-center' reverseOrder={true}/>
+      <Toaster position='top-center' reverseOrder={true} />
 
-    <ScrollToTop/>
-        <Routes>
-          
-          <Route path="/" element={<HomePage />} />
-          <Route path="/CartPage" element={<CartPage />} />
-        </Routes>
+      <ScrollToTop/>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/CartPage" element={<CartPage />} />
+        <Route path="/AllItem" element={<AllItem />} />
+      </Routes>
+
       
-        <Routes>
-          <Route path="/AllItem" element={<AllItem />} />
-        </Routes>
-        
+
     </>
   )
 }
