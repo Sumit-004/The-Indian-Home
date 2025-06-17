@@ -26,7 +26,7 @@ const newItem = [
 const Explore = () => {
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const allClick = () => {
         // window.scrollTo({ top: 0, behavior: 'smooth'});
         navigate('/AllItem');
     };
@@ -61,7 +61,7 @@ const Explore = () => {
                     </div>
                 ))}
                 <div className='w-full flex justify-center my-4'>
-                    <button className='md:text-[20px] text-[10px] py-2 px-4 bg-black text-white font-semibold cursor-pointer hover:bg-blue-950' onClick={handleClick}>VIEW ALL</button>
+                    <button className='md:text-[20px] text-[10px] py-2 px-4 bg-black text-white font-semibold cursor-pointer hover:bg-blue-950' onClick={allClick}>VIEW ALL</button>
                 </div>
             </div>
         </>

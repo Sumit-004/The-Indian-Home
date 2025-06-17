@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from 'react'
-import Header from '../Components/Header'
-import Footer from '../Components/Footer'
-import Categories from '../Components/Categories'
-import NewArrivalCard from '../Components/NewArrivalCard';
-import Slider from '../Components/Slider'
+import Header from '../FrontendComponents/Header'
+import Footer from '../FrontendComponents/Footer'
+import Categories from '../FrontendComponents/Categories'
+import NewArrivalCard from '../FrontendComponents/NewArrivalCard';
+import Slider from '../FrontendComponents/Slider'
 import AllItem from './AllItem';
 import homeimage from "../assets/homeimage.webp"
-import Explore from '../Components/Explore';
-import Login from '../Components/Login';
+import Explore from '../FrontendComponents/Explore';
+// import Login from './Login';
 import { dataContext } from '../Context/UserContext'
 import { useSelector } from 'react-redux';
 import { useState } from 'react'
-import Review from '../Components/Review';
+import Review from '../FrontendComponents/Review';
 
 
 
@@ -23,7 +23,7 @@ const HomePage = () => {
         <div>
             <header className=''><Header /></header>
             {/* SignIn */}
-            <Login />
+            {/* <Login /> */}
 
             {/* Categories Section */}
             <Categories />

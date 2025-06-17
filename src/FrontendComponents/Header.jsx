@@ -11,7 +11,8 @@ import { useSelector } from 'react-redux';
 
 const Header = () => {
   const navigate = useNavigate();
-  const handleClick = () => navigate('/CartPage');
+  const openLogin = () => navigate('/Login');
+  const openCart = () => navigate('/CartPage');
   const cart = useSelector(state => state.cart);
 
   const {
@@ -27,12 +28,12 @@ const Header = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-  if (isOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
-}, [isOpen]);
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     const newList = items.filter((item) =>
@@ -61,15 +62,14 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`fixed top-0 w-full z-50 bg-[#FAFFCA] transition-all duration-300 ease-in-out ${
-  isScrolled && !isOpen ? 'py-0 shadow-lg bg-opacity-90' : 'py-2 shadow-md'
-}`}>
+    <header className={`fixed top-0 w-full z-50 bg-[#FAFFCA] transition-all duration-300 ease-in-out ${isScrolled && !isOpen ? 'py-0 shadow-lg bg-opacity-90' : 'py-2 shadow-md'
+      }`}>
 
       {/* Top Bar */}
       <div className="flex items-center justify-between md:h-20 h-17 px-4 md:px-10 md:mx-3 mx-2 space-x-4">
 
         {/* Logo */}
-        <div className="h-14 w-14 md:h-20 md:w-20 flex-shrink-0">
+        <div className="h-14 w-14 md:h-25 md:w-25 flex-shrink-0">
           <img className="rounded-full object-cover" src={logo} alt="Logo" />
         </div>
 
@@ -96,13 +96,17 @@ const Header = () => {
         <div className="hidden md:flex flex-grow justify-between items-center">
           {/* Nav Links */}
           <nav className="flex-grow flex justify-center">
-            <ul className="flex gap-8 text-sm font-medium">
-              <li className="hover:underline cursor-pointer" onClick={() => { choice("ShowPiece"); setCateSelect(true) }}>SHOW PIECES</li>
-              <li className="hover:underline cursor-pointer" onClick={() => { choice("CupSet"); setCateSelect(true) }}>CUPS & Set</li>
-              <li className="hover:underline cursor-pointer">TABLEWARE</li>
-              <li className="hover:underline cursor-pointer">HOME ESSENTIALS</li>
+            <ul className="flex gap-8 text-md">
+              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer hover:text ">HOME</li>
+              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer" onClick={() => { choice("ShowPiece"); setCateSelect(true) }}>HOME DECOR</li>
+              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer" onClick={() => { choice("CupSet"); setCateSelect(true) }}>CUPS & SET</li>
+              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer">TABLEWARE</li>
+              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer">BEST SELLER </li>
+              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer ">CONTACT </li>
+
             </ul>
           </nav>
+
 
           {/* Icons */}
           <div className="flex items-center gap-6">
@@ -121,14 +125,14 @@ const Header = () => {
             </form>
 
             {/* Order Cart */}
-            <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={handleClick}>
+            <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={openCart}>
               <TiShoppingCart className="text-2xl" />
               <span className="absolute -top-4 left-5 font-semibold">{cart.length}</span>
               <span className="font-medium">Order</span>
             </div>
 
             {/* Sign In */}
-            <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={() => setShowSignIn(true)}>
+            <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200"  onClick={openLogin}>
               <FaUser className="text-lg" />
               <span className="font-medium">Sign In</span>
             </div>
@@ -139,9 +143,9 @@ const Header = () => {
       {/* Mobile Slide Menu */}
       <div className={`md:hidden fixed top-0 right-0 h-full w-[70%] bg-[#FAFFCA] z-50 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out shadow-lg`}>
         <div className="flex justify-between items-center p-5 border-b">
-          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={() => { setShowSignIn(true); toggleMenu(false); }}>
+          <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={() => { toggleMenu(false) }}>
             <FaUser className="text-lg" />
-            <span className="font-medium">Sign In</span>
+            <span className="font-medium"  onClick={openLogin}>Sign In</span>
           </div>
           <button className="text-2xl cursor-pointer" onClick={toggleMenu}>
             <HiX />
@@ -163,15 +167,15 @@ const Header = () => {
         </form>
 
         <ul className="flex flex-col gap-5 p-6 text-base font-medium">
-          <li>DECOR</li>
-          <li>CUPS & Set</li>
-          <li>TABLEWARE</li>
-          <li>HOME ESSENTIALS</li>
+          <li>HOME</li>
+          <li>HOME DECOR</li>
+          <li>CUPS & SET</li>
+          <li>CONTACT</li>
           <hr />
         </ul>
 
         <div className="flex flex-col gap-4 px-6 mt-2">
-          <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={handleClick}>
+          <div className="relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={openCart}>
             <TiShoppingCart className="text-xl" />
             <span className="absolute -top-2 left-4 text-[13px] font-semibold">{cart.length}</span>
             <span className="font-medium">Order</span>

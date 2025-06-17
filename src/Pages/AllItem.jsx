@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { AddItem } from '../redux/cartSlice';
 import { dataContext } from '../Context/UserContext'
 import { toast } from 'react-hot-toast';
-import Header from '../Components/Header'
-import Login from '../Components/Login';
+import Header from '../FrontendComponents/Header'
+import Login from './Login';
 
 const AllItem = () => {
 
@@ -16,7 +16,7 @@ const AllItem = () => {
   return (
     <>
       <Header />
-      <Login/>
+      {/* <Login/> */}
       <h1 className='flex justify-center md:text-4xl text-3xl my-4 pt-5 font-semibold mt-25'>SHOP NOW</h1>
       <div className='flex flex-wrap justify-center w-full md:mx-4 mx-1'>
         {item.map((card) => (

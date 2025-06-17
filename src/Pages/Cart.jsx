@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RemoveItem, DecreamentQty, IncreamentQty } from '../redux/cartSlice';
 
-const CartPage = () => {
+const Cart = () => {
     const navigate = useNavigate();
 
     const handleClose = () => {
@@ -104,4 +104,4 @@ const CartPage = () => {
     )
 }
 
-export default CartPage
+export default Cart

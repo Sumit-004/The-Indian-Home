@@ -2,7 +2,7 @@ import React from 'react'
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
-import LocationMap from '../Components/LocationMap'
+import LocationMap from '../FrontendComponents/LocationMap'
 import logo from '../assets/logo1.png'
 
 const Footer = () => {
@@ -19,7 +19,6 @@ const Footer = () => {
           <div className='flex gap-5 text-2xl justify-center'>
             <FaFacebook />
             <FaInstagramSquare />
-            <FaYoutube />
           </div>
         </div>
         {/* Quick Links */}

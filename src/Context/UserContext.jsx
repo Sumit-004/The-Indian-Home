@@ -3,7 +3,7 @@ import { items } from '../items'
 export const dataContext = createContext()
 
 function UserContext({ children }) {
-  let [showSignIn, setShowSignIn] = useState(false)
+  let [showSignIn, setShowSignIn] = useState(true)
   let [showRegister, setShowRegister] = useState(false)
   let [item, setItem] = useState(items)
   let [input, setInput] = useState("")

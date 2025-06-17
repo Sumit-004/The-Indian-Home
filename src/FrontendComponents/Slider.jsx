@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import img1 from '../assets/img2.png'
-import img2 from '../assets/img1.jpg'
-import img3 from '../assets/img3.png'
+import img1 from '../assets/slide1.jpg'
+import img2 from '../assets/slide2.png'
+import img3 from '../assets/slide3.png'
 
 
 const Slider = () => {
@@ -50,7 +50,7 @@ const Slider = () => {
 
   return (
     <>
-    <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg">
+    <div className="relative w-full max-w-7xl mx-auto overflow-hidden rounded-lg shadow-lg">
       <div className="relative h-96 md:h-[500px]">
         {slides.map((slide, index) => (
           <div
@@ -63,7 +63,7 @@ const Slider = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-full object-cover opacity-75"
+              className="w-full h-full object-cover opacity-85"
             />
             <div className="absolute z-20 text-gray-900 p-6 md:p-12 max-w-md md:max-w-xl">
               <span className="bg-black text-white text-sm font-semibold px-3 py-1 rounded-full mb-2 inline-block">
@@ -82,14 +82,14 @@ const Slider = () => {
       {/* Navigation arrows */}
       <button
         onClick={prevSlide}
-        className="absolute md:left-4 left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full z-30 hover:bg-opacity-100 transition"
+        className="absolute md:left-1 left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full z-30 hover:bg-opacity-100 transition"
         aria-label="Previous slide"
       >
         <FiChevronLeft className='md:text-[18px] text-[12px]'/>
       </button>
       <button
         onClick={nextSlide}
-        className="absolute md:right-4 right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full z-30 hover:bg-opacity-100 transition"
+        className="absolute md:right-1 right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 text-gray-800 p-2 rounded-full z-30 hover:bg-opacity-100 transition"
         aria-label="Next slide"
       >
         <FiChevronRight className='md:text-[18px] text-[12px]'/>
