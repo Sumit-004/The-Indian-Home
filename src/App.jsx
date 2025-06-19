@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from './Pages/Login'
+import Login from './Pages/Login/Signin'
 import Account from './Pages/Account'
 import Profile from './FrontendComponents/ProfileInfo'
 import Cart from './Pages/Cart'
@@ -25,9 +25,9 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* <Route path="/Login" element={<Login />} /> */}
+        <Route path="/Login" element={<Login />} />
         <Route path="/Profile" element={<Profile />} />
-        <Route path="/Login" element={<Account />} />
+        <Route path="/Account" element={<Account />} />
         <Route path="/CartPage" element={<Cart />} />
         <Route path="/AllItem" element={<AllItem />} />
       </Routes>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { toast } from 'react-hot-toast';
-import { dataContext } from '../Context/UserContext';
+import { dataContext } from '../Context/PageContext';
 import { useDispatch } from 'react-redux';
 import { AddItem } from '../redux/cartSlice';
 import { useRef, useEffect } from 'react';
@@ -43,9 +43,9 @@ const NewArrivalCard = () => {
                     ref={trackRef}
                     className="flex w-[300%] transition-transform duration-500 ease-linear"
                 >
-                    {extendedCards.map((card) => (
-                        <div className='md:my-4 my-2'>
-                            <div key={card.id} className=' md:h-[320px] md:w-[280px] h-[185px] w-[140px] bg-[#E7EFC7] md:p-2 p-0 flex flex-col md:mx-6 mx-2.5'>
+                    {extendedCards.map((card,index) => (
+                        <div className='md:my-4 my-2' key={index}>
+                            <div key={card.id} className=' md:h-[320px] md:w-[280px] h-[185px] w-[140px] md:p-2 p-0 flex flex-col md:mx-6 mx-2.5'>
                                 <div className='md:h-[77%] h-[65%] w-full overflow-hidden'>
                                     <img src={card.item_image} alt="" className='object-hit h-full w-full hover:scale-107 transition-all duration-200' />
                                 </div>

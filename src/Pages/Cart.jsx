@@ -25,13 +25,14 @@ const Cart = () => {
     return (
         <div className='md:h-[100vw] h-[100dvh] bg-amber-200'>
             <div className=" mx-auto p-6 w-full h-full flex flex-col items-center overflow-auto">
+                <header className='fixed top-0 right-0 left-0 bg-amber-200 w-full'>
                 <button className='md:text-3xl text-2xl p-2 cursor-pointer fixed right-2' onClick={handleClose}><RxCross2 /></button>
-                <div className=''>
-                    <h2 className="md:text-3xl text-xl font-bold mb-6 text-center">Your Cart</h2>
+                <div className='flex items-center justify-center'>
+                    <h2 className="md:text-3xl text-xl font-bold py-4 text-center">Your Cart</h2>
                 </div>
+                </header>
                 {cart.length > 0 ? <>
-                    <div className="bg-white md:flex-row flex-col justify-between shadow-lg rounded-xl p-4 space-y-4 md:w-[70%] w-full">
-
+                    <div className="bg-white mt-10 md:flex-row flex-col justify-between shadow-lg rounded-xl p-4 space-y-4 md:w-[70%] w-full">
                         {/* Cart Card */}
                         {cart.map((item) => (
                             <div className='flex flex-col w-full'>
@@ -39,7 +40,7 @@ const Cart = () => {
                                     <div className="md:flex md:flex-row flex-col items-center space-x-4">
                                         <img src={item.image} alt="" className="md:w-50 md:h-40 w-20 h-20 rounded-lg" />
                                         <div>
-                                            <span className="md:text-lg text-sm">{item.name}</span>
+                                            <span className="md:text-lg text-[13px]">{item.name}</span>
                                             <p className="md:text-lg text-sm text-gray-500">Rs {item.price}/</p>
                                         </div>
                                     </div>
@@ -78,19 +79,18 @@ const Cart = () => {
                             </div>
                         </div>
                     </div >
-                    {/* <div className="w-[70%] flex justify-end items-center">
+                    <div className="w-[70%] flex justify-end items-center">
                         <button className="mt-4 md:px-2 md:py-1 p-1 text-[12px] md:text-[18px] bg-yellow-500 text-white rounded-lg hover:bg-yellow-700 transition">
                             Save Your Address
                         </button>
-                        </div> */}
+                        </div>
                     <div className="w-[70%] flex justify-end items-center">
                         <button className="mt-4 md:px-2 md:py-1 p-1 text-[12px] md:text-[18px] bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
                             Proceed For Payment
                         </button>
                     </div>
-                    {/* <Details/> */}
                     </>
-                    : <div className="bg-white flex flex-col justify-center items-center shadow-lg rounded-xl p-4 space-y-4 w-full max-w-2xl mx-auto">
+                    : <div className="bg-white mt-10 flex flex-col justify-center items-center shadow-lg rounded-xl p-4 space-y-4 w-full max-w-2xl mx-auto">
                         <div className="w-[50%] sm:w-[70%] md:w-[60%] lg:w-[50%] aspect-square flex items-center justify-center overflow-hidden">
                             <img src={emptycart} alt="Empty Cart" className="h-full w-full object-contain" />
                         </div>

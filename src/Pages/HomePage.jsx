@@ -8,7 +8,7 @@ import AllItem from './AllItem';
 import homeimage from "../assets/homeimage.webp"
 import Explore from '../FrontendComponents/Explore';
 // import Login from './Login';
-import { dataContext } from '../Context/UserContext'
+import { dataContext } from '../Context/PageContext'
 import { useSelector } from 'react-redux';
 import { useState } from 'react'
 import Review from '../FrontendComponents/Review';

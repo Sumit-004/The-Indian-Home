@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from 'react'
 import Img from '../assets/log.jpg'
-import { dataContext } from '../Context/UserContext'
+import { dataContext } from '../../Context/UserContext'
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
+import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Login = () => {
+const Signin = () => {
 
     let { showSignIn, setShowSignIn, showRegister, setShowRegister } = useContext(dataContext)
 
@@ -63,4 +64,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Signin;

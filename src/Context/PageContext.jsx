@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react'
 import { items } from '../items'
 export const dataContext = createContext()
 
-function UserContext({ children }) {
+function PageContext({ children }) {
   let [showSignIn, setShowSignIn] = useState(true)
   let [showRegister, setShowRegister] = useState(false)
   let [item, setItem] = useState(items)
@@ -28,4 +28,4 @@ function UserContext({ children }) {
   )
 }
 
-export default UserContext
+export default PageContext

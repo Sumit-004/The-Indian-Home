@@ -44,8 +44,8 @@ const Categories = () => {
                 <h1 className='flex justify-center md:text-4xl text-3x pt-5 font-semibold'>Categories</h1>
             </div>
             <div className='flex flex-wrap md:gap-15 gap-3 md:justify-center justify-evenly my-6'>
-                {category.map((item) => {
-                    return <div className='flex flex-col gap-1 cursor-pointer'>
+                {category.map((item,index) => {
+                    return <div className='flex flex-col gap-1 cursor-pointer' key={index}>
                         <div className="md:h-40 md:w-40 h-22 w-22 rounded-full bg-amber-300 object-cover overflow-hidden border-6 border-blue-900 shadow-lg">
                             <img src={item.img} alt="" className='h-full w-full hover:scale-110 transition-all duration-200' />
                         </div>

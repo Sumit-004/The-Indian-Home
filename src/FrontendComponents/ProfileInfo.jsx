@@ -1,25 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FaUserEdit, FaSignOutAlt } from 'react-icons/fa';
 
 const ProfileInfo = () => {
+  const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
   const [user, setUser] = useState({
-    name: 'Sumit',
-    email: 'sumit@example.com',
-    phone: '9520410011',
-    address: 'Bhimsen Colony, Ballabgarh Faridabad'
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
   });
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/users/${userId}`,{
+          headers: {
+            Authorization: `Bearer ${token}` // only if using JWT token auth
+          }
+      });
+        setUser(res.data);
+      } catch (err) {
+        console.error("Error loading user data:", err);
+      }
+    };
+
+    if (userId) {
+      fetchUser();
+    }
+  }, [userId]);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     // Save user data logic
-    console.log('Saved:', user);
+    // console.log('Saved:', user);
+    try {
+      const res = await axios.put(`http://localhost:5000/api/users/update/${userId}`, user);
+      alert("Profile updated successfully!");
+      setUser(res.data); // updated user info
+    } catch (err) {
+      alert("Failed to update profile.");
+      console.error(err);
+    }
   };
 
   const handleLogout = () => {
     // Logout logic
+    localStorage.clear();
     console.log('User logged out');
   };
 
@@ -69,7 +101,7 @@ const ProfileInfo = () => {
           />
         </div>
 
-         <div>
+        <div>
           <label className="block text-sm font-medium">Address</label>
           <input
             type="text"

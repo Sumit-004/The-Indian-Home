@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { items } from '../items';
-import { dataContext } from '../Context/UserContext'
+import { dataContext } from '../Context/PageContext'
 import { useNavigate } from 'react-router-dom';
 import { TiShoppingCart } from 'react-icons/ti';
 import { CiSearch } from 'react-icons/ci';
@@ -8,10 +8,14 @@ import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { FaUser } from 'react-icons/fa';
 import logo from '../assets/logo1.png';
 import { useSelector } from 'react-redux';
+import { useAuth } from "../Context/AuthContext";
 
 const Header = () => {
+  const { user, logout } = useAuth();
+
   const navigate = useNavigate();
   const openLogin = () => navigate('/Login');
+  const openAccount = () => navigate('/Account');
   const openCart = () => navigate('/CartPage');
   const cart = useSelector(state => state.cart);
 
@@ -132,25 +136,33 @@ const Header = () => {
             </div>
 
             {/* Sign In */}
-            <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200"  onClick={openLogin}>
+            {user ? (
+              <>
+                <span className='font-semibold text-emerald-800 cursor-pointer hover:scale-105 transition-all duration-300' onClick={openAccount}>Hello, {user.name}</span>
+              </>
+            ) : (<div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={openLogin}>
               <FaUser className="text-lg" />
               <span className="font-medium">Sign In</span>
-            </div>
+            </div>)}
           </div>
         </div>
       </div>
 
       {/* Mobile Slide Menu */}
       <div className={`md:hidden fixed top-0 right-0 h-full w-[70%] bg-[#FAFFCA] z-50 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out shadow-lg`}>
-        <div className="flex justify-between items-center p-5 border-b">
+
+        {user ? (<>
+          <span className='font-semibold text-emerald-800 cursor-pointer hover:scale-105 transition-all duration-300' onClick={openAccount}>Hello, {user.name}</span>
+        </>) : (<div className="flex justify-between items-center p-5 border-b">
           <div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition" onClick={() => { toggleMenu(false) }}>
             <FaUser className="text-lg" />
-            <span className="font-medium"  onClick={openLogin}>Sign In</span>
+            <span className="font-medium" onClick={openLogin}>Sign In</span>
           </div>
           <button className="text-2xl cursor-pointer" onClick={toggleMenu}>
             <HiX />
           </button>
-        </div>
+        </div>)}
+
 
         {/* Mobile Search in Slide Menu (Optional) */}
         <form onSubmit={(e) => e.preventDefault()}>
