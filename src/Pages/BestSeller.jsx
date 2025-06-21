@@ -6,7 +6,7 @@ import { AddItem } from '../redux/cartSlice';
 import { toast } from 'react-hot-toast';
 
 
-const Explore = () => {
+const BestSeller = () => {
     const navigate = useNavigate();
     let { item } = useContext(dataContext)
 
@@ -15,7 +15,7 @@ const Explore = () => {
         navigate('/AllItem');
     };
 
-    const newIds = [1, 11, 22, 25, 33, 44, 45, 47, 48];
+    const newIds = [4, 10, 15, 17, 24, 28, 32, 38, 42, 46, 49, 50];
     const newItems = item.filter(item => newIds.includes(item.id));
 
     const extendedCards = [...newItems, ...newItems.slice(0, 4)];
@@ -25,9 +25,9 @@ const Explore = () => {
 
     return (
         <>
-            <div className='mt-16 flex items-center justify-center gap-2'>
+            <div className='mt-24 flex items-center justify-center gap-2'>
                 <p className='w-8 h-[2px] bg-black'></p>
-                <p className='prata-regular md:text-5xl text-3xl text-gray-600 font-semibold'>Explore</p>
+                <p className='prata-regular md:text-5xl text-3xl text-gray-600 font-semibold'>Our Best Seller</p>
             </div>            <div className='flex flex-wrap justify-center w-full md:mx-4 mx-1'>
                 {extendedCards.map((card, index) => (
                     <div className='md:my-6 my-5' key={index}>
@@ -60,4 +60,4 @@ const Explore = () => {
     )
 }
 
-export default Explore
+export default BestSeller

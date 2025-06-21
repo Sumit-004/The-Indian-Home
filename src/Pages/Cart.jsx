@@ -5,8 +5,19 @@ import emptycart from '../assets/cart.jpg'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RemoveItem, DecreamentQty, IncreamentQty } from '../redux/cartSlice';
+import { useAuth } from "../Context/AuthContext";
+import axios from 'axios';
 
 const Cart = () => {
+    const { user } = useAuth();
+    const verify = () => {
+        if (user == null) {
+            alert("Please Sign in")
+            navigate("/Login")
+        }
+        else { "" }
+    }
+
     const navigate = useNavigate();
 
     const handleClose = () => {
@@ -15,7 +26,20 @@ const Cart = () => {
 
     let dispatch = useDispatch();
     const cart = useSelector(state => state.cart);
-
+    const userId = localStorage.getItem("userId");
+    const handleOrder = async () => {
+        try {
+            const orderData = {
+                userId,
+                items: cart,
+                orderDate: new Date(),
+            };
+            const res = await axios.post('http://localhost:5000/api/orders', orderData);
+            alert('Order placed successfully!');
+        } catch (error) {
+            console.error("Order failed", error);
+        }
+    };
     let subtotal = cart.reduce((total, item) => total + item.qty * item.price, 0)
     let deliveryFee = 20;
     let taxes = subtotal * 0.5 / 100;
@@ -23,16 +47,16 @@ const Cart = () => {
 
 
     return (
-        <div className='md:h-[100vw] h-[100dvh] bg-amber-200'>
-            <div className=" mx-auto p-6 w-full h-full flex flex-col items-center overflow-auto">
-                <header className='fixed top-0 right-0 left-0 bg-amber-200 w-full'>
-                <button className='md:text-3xl text-2xl p-2 cursor-pointer fixed right-2' onClick={handleClose}><RxCross2 /></button>
-                <div className='flex items-center justify-center'>
-                    <h2 className="md:text-3xl text-xl font-bold py-4 text-center">Your Cart</h2>
-                </div>
+        <div className='mt-20'>
+            <div className="bg-slate-200 mx-auto p-6 w-full h-full flex flex-col items-center">
+                <header className='relative w-full'>
+                    <button className='md:text-3xl text-2xl p-2 cursor-pointer absolute right-3 hover:text-gray-700' onClick={handleClose}><RxCross2 /></button>
+                    <div className='flex items-center justify-center'>
+                        <h2 className="md:text-3xl text-xl font-bold py-4 text-center">Your Cart</h2>
+                    </div>
                 </header>
                 {cart.length > 0 ? <>
-                    <div className="bg-white mt-10 md:flex-row flex-col justify-between shadow-lg rounded-xl p-4 space-y-4 md:w-[70%] w-full">
+                    <div className="bg-white md:mt-6 mt-12 md:flex-row flex-col justify-between shadow-lg rounded-xl p-4 space-y-4 md:w-[70%] w-full">
                         {/* Cart Card */}
                         {cart.map((item) => (
                             <div className='flex flex-col w-full'>
@@ -79,18 +103,14 @@ const Cart = () => {
                             </div>
                         </div>
                     </div >
+                    
                     <div className="w-[70%] flex justify-end items-center">
-                        <button className="mt-4 md:px-2 md:py-1 p-1 text-[12px] md:text-[18px] bg-yellow-500 text-white rounded-lg hover:bg-yellow-700 transition">
-                            Save Your Address
-                        </button>
-                        </div>
-                    <div className="w-[70%] flex justify-end items-center">
-                        <button className="mt-4 md:px-2 md:py-1 p-1 text-[12px] md:text-[18px] bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
-                            Proceed For Payment
+                        <button className="mt-4 md:px-2 md:py-1 p-1 text-[12px] md:text-[20px] bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition" onClick={user==null?verify:handleOrder}>
+                            Place Order
                         </button>
                     </div>
-                    </>
-                    : <div className="bg-white mt-10 flex flex-col justify-center items-center shadow-lg rounded-xl p-4 space-y-4 w-full max-w-2xl mx-auto">
+                </>
+                    : <div className="bg-white mt-4 mb-10 flex flex-col justify-center items-center shadow-lg rounded-xl p-4 space-y-4 w-full max-w-2xl mx-auto">
                         <div className="w-[50%] sm:w-[70%] md:w-[60%] lg:w-[50%] aspect-square flex items-center justify-center overflow-hidden">
                             <img src={emptycart} alt="Empty Cart" className="h-full w-full object-contain" />
                         </div>

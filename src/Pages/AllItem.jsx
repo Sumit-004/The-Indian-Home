@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AddItem } from '../redux/cartSlice';
 import { dataContext } from '../Context/PageContext'
 import { toast } from 'react-hot-toast';
-import Header from '../FrontendComponents/Header'
+import Navbar from '../FrontendComponents/Navbar'
 import Login from './Login/Signin';
 
 const AllItem = () => {
@@ -15,7 +15,6 @@ const AllItem = () => {
 
   return (
     <>
-      <Header />
       {/* <Login/> */}
       <h1 className='flex justify-center md:text-4xl text-3xl my-4 pt-5 font-semibold mt-25'>SHOP NOW</h1>
       <div className='flex flex-wrap justify-center w-full md:mx-4 mx-1 mb-8'>
@@ -31,7 +30,7 @@ const AllItem = () => {
                 </div>
                 <div className='md:my-1.5 my-1 md:flex md:flex-row flex-col justify-between h-0.5/2 md:text-[16px] text-[10px]'>
                   <div>
-                    <span className='line-through'>Rs. 599/-</span>
+                    <span className='line-through'>Rs. {card.cross_price}/-</span>
                     <span className='font-semibold'>Rs. {card.price}/-</span>
                   </div>
                   <div className='flex justify-end mt-1'>

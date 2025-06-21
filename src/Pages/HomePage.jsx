@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import Header from '../FrontendComponents/Header'
+import Navbar from '../FrontendComponents/Navbar'
 import Footer from '../FrontendComponents/Footer'
 import Categories from '../FrontendComponents/Categories'
 import NewArrivalCard from '../FrontendComponents/NewArrivalCard';
@@ -21,26 +21,28 @@ const HomePage = () => {
 
     return (
         <div>
-            <header className=''><Header /></header>
-            {/* SignIn */}
-            {/* <Login /> */}
+            <header className=''><Navbar /></header>
 
-            {/* Categories Section */}
-            <Categories />
-            <div className='w-full'>
-                {input || cateSelect ? <AllItem /> : <Explore />}
+
+            {input.trim() === "" && !cateSelect && <Categories />}
+
+            <div className="w-full">
+                {input.trim() !== "" || cateSelect ? <AllItem /> : <Explore />}
             </div>
+
 
             <div>
                 <img src={homeimage} alt="" />
             </div>
 
             {/* New Arrival Section */}
-            <section className='w-full h-auto bg-[#FAFFCA] my-4'>
-                <h1 className='flex justify-center md:text-5xl text-3xl my-4 pt-5 font-semibold'>NEW ARRIVALS</h1>
-                <div className='w-full flex flex-wrap justify-center md:mx-5 md:gap-10 gap-3'>
-                    <NewArrivalCard />
+            <section className='w-full h-auto mt-4 mb-6'>
+                <div className='mt-24 flex items-center justify-center gap-2'>
+                    <p className='w-8 h-[2px] bg-black'></p>
+                    <p className='prata-regular md:text-5xl text-3xl text-gray-600 font-semibold'>New Arrivals</p>
                 </div>
+                <NewArrivalCard />
+
             </section>
 
             {/* Image Slider */}
@@ -51,8 +53,6 @@ const HomePage = () => {
             {/* Review Section */}
             <Review />
 
-            {/* Footer */}
-            <Footer />
 
         </div>
     )

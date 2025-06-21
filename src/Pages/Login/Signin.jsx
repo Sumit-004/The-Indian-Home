@@ -41,7 +41,7 @@ const Signin = () => {
                 <img src={Img} alt="" className='md:h-[400px] h-[200px] w-[200px] md:w-[400px] object-cover' />
             </div>
             {/* SignIn */}
-            <div className='md:h-full h-auto md:w-[60%] w-full flex justify-center md:items-center items-start mt-10'>
+            <div className='md:h-full h-auto md:w-[60%] w-full flex justify-center md:items-center items-start mt-10 '>
                 {showSignIn && (<motion.div
                     initial={{ x: -200, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}

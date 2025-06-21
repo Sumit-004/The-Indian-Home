@@ -6,11 +6,15 @@ import { TiShoppingCart } from 'react-icons/ti';
 import { CiSearch } from 'react-icons/ci';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { FaUser } from 'react-icons/fa';
+import { FaSignOutAlt } from 'react-icons/fa';
+import { CgProfile } from "react-icons/cg";
+import { BsBoxSeam } from "react-icons/bs";
 import logo from '../assets/logo1.png';
 import { useSelector } from 'react-redux';
 import { useAuth } from "../Context/AuthContext";
+import { NavLink, Link } from 'react-router-dom';
 
-const Header = () => {
+const Navbar = () => {
   const { user, logout } = useAuth();
 
   const navigate = useNavigate();
@@ -19,8 +23,15 @@ const Header = () => {
   const openCart = () => navigate('/CartPage');
   const cart = useSelector(state => state.cart);
 
+const handleLogoutAndRedirect = async () => {
+        try {
+            await logout(); 
+            navigate("/");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
   const {
-    setShowSignIn,
     input,
     setInput,
     setItem,
@@ -65,8 +76,14 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+
+  const filteredSuggestions = input ? items.filter((item) =>
+    item.description.toLowerCase().includes(input.toLowerCase())
+  )
+    : [];
+
   return (
-    <header className={`fixed top-0 w-full z-50 bg-[#FAFFCA] transition-all duration-300 ease-in-out ${isScrolled && !isOpen ? 'py-0 shadow-lg bg-opacity-90' : 'py-2 shadow-md'
+    <header className={`fixed top-0 w-full z-50 bg-white transition-all duration-300 ease-in-out ${isScrolled && !isOpen ? 'py-0 shadow-lg bg-opacity-90' : 'py-2 '
       }`}>
 
       {/* Top Bar */}
@@ -86,8 +103,29 @@ const Header = () => {
               placeholder="Search"
               className="pl-10 pr-4 py-2 rounded-full border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-yellow-300 text-sm"
               onChange={(e) => setInput(e.target.value)}
-              value={input}
-            />
+              value={input} />
+            {input.trim() && (
+              <div className="absolute left-4 right-4 z-20 bg-white shadow-lg rounded max-h-60 overflow-y-auto mt-1 border border-gray-300">
+                {filteredSuggestions.length > 0 ? (
+                  <ul>
+                    {filteredSuggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        onClick={() => {
+                          setInput(suggestion.description);
+                          setItem([suggestion]);
+                        }}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                      >
+                        {suggestion.description}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="px-4 py-2 text-sm text-gray-500">No items found</div>
+                )}
+              </div>
+            )}
           </div>
         </form>
 
@@ -99,19 +137,27 @@ const Header = () => {
         {/* Desktop Nav & Icons */}
         <div className="hidden md:flex flex-grow justify-between items-center">
           {/* Nav Links */}
+          
           <nav className="flex-grow flex justify-center">
-            <ul className="flex gap-8 text-md">
-              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer hover:text ">HOME</li>
-              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer" onClick={() => { choice("ShowPiece"); setCateSelect(true) }}>HOME DECOR</li>
-              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer" onClick={() => { choice("CupSet"); setCateSelect(true) }}>CUPS & SET</li>
-              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer">TABLEWARE</li>
-              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer">BEST SELLER </li>
-              <li className="hover:text-gray-400 hover:scale-102 cursor-pointer ">CONTACT </li>
-
+            <ul className='flex gap-8 text-md text-gray-800'>
+              <NavLink to='/' className='flex flex-col items-center gap-0'>
+                <p>HOME</p>
+                <hr className='w-3/4 border-none h-[2px] bg-gray-700 hidden' />
+              </NavLink>
+              <NavLink to='/bestseller' className='flex flex-col items-center gap-0'>
+                <p>BEST SELLER</p>
+                <hr className='w-3/4 border-none h-[2px] bg-gray-700 hidden' />
+              </NavLink>
+              <NavLink to='/contact' className='flex flex-col items-center gap-0'>
+                <p>CONTACT</p>
+                <hr className='w-3/4 border-none h-[2px] bg-gray-700 hidden' />
+              </NavLink>
+              {/* <NavLink className='flex flex-col items-center gap-0'>
+                <p onClick={() => { choice("CupSet"); setCateSelect(true) }}>CONTACT</p>
+                <hr className='w-3/4 border-none h-[2px] bg-gray-700 hidden' />
+              </NavLink> */}
             </ul>
           </nav>
-
-
           {/* Icons */}
           <div className="flex items-center gap-6">
             {/* Search (Desktop) */}
@@ -125,6 +171,31 @@ const Header = () => {
                   onChange={(e) => setInput(e.target.value)}
                   value={input}
                 />
+
+                {/* Suggestions Dropdown */}
+                {input && (
+                  <div className="absolute z-20 bg-white shadow-lg rounded w-full max-h-60 overflow-y-auto mt-1 border border-gray-300">
+                    {filteredSuggestions.length > 0 ? (
+                      <ul>
+                        {filteredSuggestions.map((suggestion, index) => (
+                          <li
+                            key={index}
+                            onClick={() => {
+                              setInput(suggestion.description);
+                              setItem([suggestion]);
+                            }}
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                          >
+                            {suggestion.description}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="px-4 py-2 text-sm text-gray-500">No items found</div>
+                    )}
+                  </div>
+                )}
+
               </div>
             </form>
 
@@ -136,20 +207,25 @@ const Header = () => {
             </div>
 
             {/* Sign In */}
-            {user ? (
-              <>
-                <span className='font-semibold text-emerald-800 cursor-pointer hover:scale-105 transition-all duration-300' onClick={openAccount}>Hello, {user.name}</span>
-              </>
-            ) : (<div className="flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={openLogin}>
+            <div className=" group relative flex gap-2 items-center cursor-pointer hover:text-yellow-700 transition-all duration-200" onClick={openLogin}>
               <FaUser className="text-lg" />
-              <span className="font-medium">Sign In</span>
-            </div>)}
+              {user ? (<span className="font-medium">{user.name}</span>
+              ) : (<span className="font-medium">Sign In</span>
+              )}
+              <div className='group-hover:block hidden absolute dropdown-menu -right-8 pt-4 top-6'>
+                <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
+                  <p className='cursor-pointer hover:text-black flex items-center gap-1.5'><CgProfile/>My Profile</p>
+                  <p className='cursor-pointer hover:text-black flex items-center gap-1.5'><BsBoxSeam/>My Orders</p>
+                  <p className='cursor-pointer hover:text-black flex items-center gap-1.5' onClick={logout}><FaSignOutAlt/>Logout</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Mobile Slide Menu */}
-      <div className={`md:hidden fixed top-0 right-0 h-full w-[70%] bg-[#FAFFCA] z-50 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out shadow-lg`}>
+      <div className={`md:hidden fixed top-0 right-0 h-full w-full bg-white z-50 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out shadow-lg`}>
 
         {user ? (<>
           <span className='font-semibold text-emerald-800 cursor-pointer hover:scale-105 transition-all duration-300' onClick={openAccount}>Hello, {user.name}</span>
@@ -163,26 +239,12 @@ const Header = () => {
           </button>
         </div>)}
 
-
-        {/* Mobile Search in Slide Menu (Optional) */}
-        <form onSubmit={(e) => e.preventDefault()}>
-          <div className="relative mt-4 px-4">
-            <CiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="pl-10 pr-4 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-200 shadow-sm"
-              onChange={(e) => setInput(e.target.value)}
-              value={input}
-            />
-          </div>
-        </form>
-
         <ul className="flex flex-col gap-5 p-6 text-base font-medium">
-          <li>HOME</li>
-          <li>HOME DECOR</li>
-          <li>CUPS & SET</li>
-          <li>CONTACT</li>
+          <li className='hover:bg-gray-200 px-2 py-1 rounded-md cursor-pointer'>HOME</li>
+          <li className='hover:bg-gray-200 px-2 py-1 rounded-md cursor-pointer'>YOUR PROFILE</li>
+          <li className='hover:bg-gray-200 px-2 py-1 rounded-md cursor-pointer'>HOME DECOR</li>
+          <li className='hover:bg-gray-200 px-2 py-1 rounded-md cursor-pointer'>CUPS & SET</li>
+          <li className='hover:bg-gray-200 px-2 py-1 rounded-md cursor-pointer'>CONTACT</li>
           <hr />
         </ul>
 
@@ -192,10 +254,17 @@ const Header = () => {
             <span className="absolute -top-2 left-4 text-[13px] font-semibold">{cart.length}</span>
             <span className="font-medium">Order</span>
           </div>
+          <button
+            type="button"
+            className="bg-red-500 md:text-[15px] text-[13px] px-2 py-2 rounded-lg hover:bg-red-600 flex items-center gap-2 cursor-pointer"
+            onClick={handleLogoutAndRedirect}
+          >
+            <FaSignOutAlt /> Logout
+          </button>
         </div>
       </div>
     </header>
   );
 };
 
-export default Header;
+export default Navbar;
