@@ -93,8 +93,10 @@ export default function ReviewSlider() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Customer Reviews</h2>
-
+      <div className='md:mt-12 mt-8 mb-2 flex items-center justify-center gap-2'>
+        <p className='w-8 h-[2px] bg-black'></p>
+        <p className='prata-regular md:text-5xl text-2xl text-gray-600 font-semibold'><span className='text-black'>Customer</span> Review</p>
+      </div>
       <div
         className="relative overflow-hidden"
         ref={sliderRef}
@@ -119,8 +121,8 @@ export default function ReviewSlider() {
                     window.innerWidth >= 768
                       ? "320px"
                       : window.innerWidth >= 640
-                      ? "300px"
-                      : "260px",
+                        ? "300px"
+                        : "260px",
                 }}
               >
                 <p className="text-gray-700 mb-4 text-sm sm:text-base">"{review.text}"</p>
@@ -157,9 +159,8 @@ export default function ReviewSlider() {
             key={idx}
             onClick={() => setCurrentIndex(idx)}
             aria-label={`Go to review ${idx + 1}`}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${
-              currentIndex === idx ? "bg-black" : "bg-gray-300"
-            }`}
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${currentIndex === idx ? "bg-black" : "bg-gray-300"
+              }`}
           />
         ))}
       </div>

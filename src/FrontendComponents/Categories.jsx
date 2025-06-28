@@ -6,15 +6,10 @@ import img4 from '../assets/category/homedecore.jpg'
 import img5 from '../assets/category/kitchenitem.jpg'
 import img6 from '../assets/category/cups.jpg'
 
-
 const category = [
     {
         img: img,
         title: "Table Ware",
-    },
-    {
-        img: img2,
-        title: "Showpiece",
     },
     {
         img: img3,
@@ -26,7 +21,11 @@ const category = [
     },
     {
         img: img5,
-        title: "Kitchen Ware",
+        title: "Kitchen Items",
+    },
+    {
+        img: img2,
+        title: "Showpiece",
     },
     {
         img: img6,
@@ -39,12 +38,7 @@ const Categories = () => {
 
     return (
         <>
-        
-            <div className='mt-24 flex items-center justify-center gap-2'>
-                <p className='w-8 h-[2px] bg-black'></p>
-                <p className='prata-regular md:text-5xl text-3xl text-gray-600 font-semibold'>Categories</p>
-            </div>
-            <div className='flex flex-wrap md:gap-15 gap-3 md:justify-center justify-evenly my-6'>
+            <div className='mt-24 flex flex-wrap md:gap-15 gap-3 md:justify-center justify-evenly my-6'>
                 {category.map((item,index) => {
                     return <div className='flex flex-col gap-1 cursor-pointer' key={index}>
                         <div className="md:h-40 md:w-40 h-22 w-22 rounded-full object-cover overflow-hidden border-6 border-blue-900 shadow-lg">

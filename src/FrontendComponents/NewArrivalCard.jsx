@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AddItem } from '../redux/cartSlice';
 
 const NewArrivalCard = () => {
-    const { item } = useContext(dataContext);
+    const { item, products } = useContext(dataContext);
     const trackRef = useRef(null);
     const animationRef = useRef(null);
     const offsetRef = useRef(0);
@@ -13,9 +13,7 @@ const NewArrivalCard = () => {
 
     const dispatch = useDispatch();
 
-    const newIds = [4, 18, 24, 37, 44, 55];
-    const newItems = item.filter(item => newIds.includes(item.id));
-    const extendedCards = [...newItems, ...newItems.slice(0, 4)];
+    const filterProducts = products?.slice(4, 12) || [];
 
     useEffect(() => {
         const track = trackRef.current;
@@ -45,18 +43,18 @@ const NewArrivalCard = () => {
     };
 
     return (
-        <div className="w-full overflow-hidden max-w-7xl mx-auto">
+        <div className="w-full overflow-hidden max-w-7xl mx-auto mb-8">
             <div
                 ref={trackRef}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 className="flex w-[300%] transition-transform duration-500 ease-linear"
             >
-                {extendedCards.map((card, index) => (
+                {filterProducts.map((card, index) => (
                     <div className='md:my-4 my-2' key={index}>
                         <div key={card.id} className='md:h-[320px] md:w-[280px] h-[185px] w-[140px] md:p-2 p-0 flex flex-col md:mx-6 mx-2.5'>
                             <div className='md:h-[77%] h-[65%] w-full overflow-hidden'>
-                                <img src={card.item_image} alt="" className='object-hit h-full w-full hover:scale-107 transition-all duration-200' />
+                                <img src={card.image && card.image[0]} alt="" className='object-hit h-full w-full hover:scale-107 transition-all duration-200' />
                             </div>
                             <div className='md:h-[23%] h-[35%] md:text-[15px] text-[9px]'>
                                 <div className='h-1.5/2'>
@@ -64,7 +62,7 @@ const NewArrivalCard = () => {
                                 </div>
                                 <div className='md:flex md:flex-row flex-col justify-between h-0.5/2 md:text-[16px] text-[10px]'>
                                     <div>
-                                        <span className='line-through'>Rs. 599/-</span>
+                                        {/* <span className='line-through'>Rs. 599/-</span> */}
                                         <span className='font-semibold'>Rs. {card.price}/-</span>
                                     </div>
                                     <div className='flex justify-center'>

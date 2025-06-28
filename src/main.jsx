@@ -7,18 +7,13 @@ import PageContext from './Context/PageContext.jsx'
 import App from './App.jsx'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.js'
-import { AuthProvider } from "./Context/AuthContext"; // import here
 
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Provider store={store}>
       <PageContext>
-        <AuthProvider>
-          <StrictMode>
             <App />
-          </StrictMode>
-        </AuthProvider>
       </PageContext>
     </Provider>
   </BrowserRouter>

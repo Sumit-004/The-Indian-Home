@@ -1,63 +1,143 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { dataContext } from '../../Context/PageContext'
+import { dataContext } from '../../Context/PageContext';
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import axios from "axios";
-import { useAuth } from "../../Context/AuthContext";
-import { AnimatePresence, motion } from "framer-motion";
+import toast, { Toaster } from 'react-hot-toast';
+import { motion } from "framer-motion";
 
 const Signup = () => {
-    const { login } = useAuth();
-    const navigate = useNavigate(); 
+    const { setShowSignIn, setShowRegister, token, setToken, navigate, backendUrl } = useContext(dataContext);
 
-    let { setShowSignIn, setShowRegister } = useContext(dataContext)
-    const [form, setForm] = useState({ name: "", email: "", password: "" });
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const res = await axios.post("http://localhost:5000/api/auth/signup", form);
-            alert("Sign up successful");
-            login(res.data.user);
-            localStorage.setItem("userId", res.data.user._id);
-            navigate("/");  
+    const onSubmitHandler = async (event) => {
+        event.preventDefault();
 
-        } catch (err) {
-            alert(err.response.data.error);
+        if (password !== confirmPassword) {
+            setError("Password do not match!");
+            return;
+        } else {
+            setError("");
         }
-    };
+
+        try {
+            const response = await axios.post(backendUrl + '/api/user/register', { name, email, password })
+            if (response.data.success) {
+                setToken(response.data.token)
+                localStorage.setItem('token', response.data.token)
+                toast.success('User created Successfull')
+            } else {
+                toast.error(response.data.message)
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+
+        }
+    }
+
 
 
     return (
-        <>
-            <motion.div
-                initial={{ x: 200, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: 200, opacity: 0 }}
-                transition={{ duration: 0.5, }}
-                className={`relative h-auto md:w-[400px] w-[90%] bg-[#3674B5] flex flex-col md:gap-6 gap-3 md:py-12 py-7 px-6 shadow-lg rounded-lg`}>
-                <h1 className='md:text-3xl text-2xl font-bold flex items-center justify-center'>Register</h1>
-                <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
-                    <div className='flex flex-col gap-2'>
-                        <div className='flex md:text-[17px] text-[14px] gap-2 items-center justify-center'><FaRegUser className='font-bold text-2xl' /><input className='text-white w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-700' onChange={handleChange} required name='name' type="text" placeholder='Enter full name' /></div>
-                        <div className='flex md:text-[17px] text-[14px] gap-2 items-center justify-center'><MdOutlineEmail className='font-bold text-2xl' /><input className='text-white w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-700' onChange={handleChange} required name='email' type="email" placeholder='xyz123@gmail.com' /></div>
-                        <div className='flex md:text-[17px] text-[14px] gap-2 items-center justify-center'><RiLockPasswordLine className='font-bold text-2xl' /><input className='text-white w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-700' onChange={handleChange} required name='password' type="password" placeholder='Enter password' /></div>
-                        <div className='flex md:text-[17px] text-[14px] gap-2 items-center justify-center'><RiLockPasswordLine className='font-bold text-2xl' /><input className='text-white w-full h-8 p-1 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-700' onChange={handleChange} required name='password' type="password" placeholder='Re-enter password' /></div>
-                        <span className='ml-7 md:text-[17px] text-[14px] flex gap-1'><input type="checkbox" name="" id="" />Remember Me</span>
-                    </div>
-                    <button className='p-2 bg-[#0E2148] mx-6 text-white cursor-pointer hover:bg-blue-900 transition-all duration-300' type='submit'>Sign Up</button>
-                </form>
-                <p className=' md:text-[17px] text-[14px] ml-7'>Already have an Account? <span className='text-blue-300 cursor-pointer underline hover:text-black transition-all duration-300' onClick={() => { setShowSignIn(true), setShowRegister(false) }}>Log In</span> </p>
-            </motion.div>
+        <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 50, opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="backdrop-blur-md bg-white/30 shadow-xl rounded-xl w-[90%] max-w-md p-8 md:p-10"
+        >
+            <h2 className="text-2xl md:text-3xl font-semibold text-center text-blue-900 mb-6">Register</h2>
 
-        </>
-    )
-}
+            {error && (
+                <div className="bg-red-100 text-red-700 px-4 py-2 rounded text-sm mb-4">
+                    {error}
+                </div>
+            )}
+
+            <form onSubmit={onSubmitHandler} className="space-y-5">
+                <div className="flex items-center border-b border-gray-400 focus-within:border-blue-500 px-2 py-1">
+                    <FaRegUser className="text-xl text-blue-800" />
+                    <input
+                        className="ml-2 w-full bg-transparent outline-none text-gray-700 placeholder:text-gray-500"
+                        type="text"
+                        value={name}
+                        required
+                        placeholder="Full Name"
+                        onChange={(e) => setName(e.target.value)}
+
+                    />
+                </div>
+                <div className="flex items-center border-b border-gray-400 focus-within:border-blue-500 px-2 py-1">
+                    <MdOutlineEmail className="text-xl text-blue-800" />
+                    <input
+                        className="ml-2 w-full bg-transparent outline-none text-gray-700 placeholder:text-gray-500"
+                        type="email"
+                        value={email}
+                        required
+                        placeholder="Email"
+                        onChange={(e) => setEmail(e.target.value)}
+
+                    />
+                </div>
+                <div className="flex items-center border-b border-gray-400 focus-within:border-blue-500 px-2 py-1">
+                    <RiLockPasswordLine className="text-xl text-blue-800" />
+                    <input
+                        className="ml-2 w-full bg-transparent outline-none text-gray-700 placeholder:text-gray-500"
+                        type="password"
+                        value={password}
+                        required
+                        placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+
+                    />
+                </div>
+                <div className="flex items-center border-b border-gray-400 focus-within:border-blue-500 px-2 py-1">
+                    <RiLockPasswordLine className="text-xl text-blue-800" />
+                    <input
+                        className="ml-2 w-full bg-transparent outline-none text-gray-700 placeholder:text-gray-500"
+                        type="password"
+                        value={confirmPassword}
+                        required
+                        placeholder="Re-enter Password"
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                </div>
+
+                <div className="text-sm text-gray-700 flex items-center space-x-2">
+                    <input type="checkbox" id="remember" className="accent-blue-600" />
+                    <label htmlFor="remember">Remember me</label>
+                </div>
+
+                <button
+                    type="submit"
+                    className="w-full cursor-pointer bg-blue-800 text-white py-2 rounded hover:bg-blue-900 transition duration-300"
+                >
+                    Register
+                </button>
+            </form>
+
+            <p className="text-center text-sm mt-4 text-gray-700">
+                Already have an account?{" "}
+                <span
+                    className="text-blue-600 cursor-pointer hover:underline"
+                    onClick={() => {
+                        setShowSignIn(true);
+                        setShowRegister(false);
+                    }}
+                >
+                    Log In
+                </span>
+            </p>
+        </motion.div>
+    );
+};
 
 export default Signup;
